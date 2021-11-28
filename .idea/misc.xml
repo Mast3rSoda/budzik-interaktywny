@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/drawable/roundedcorners.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/activity_main.xml" value="0.336464560204953" />
+        <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/list_view_layout.xml" value="0.33" />
       </map>
     </option>
   </component>

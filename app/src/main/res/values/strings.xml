@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Budzik Interaktywny</string>
+    <string name="addAlarmCD">Add Alarm</string>
+    <string name="sidebarButtonCD">Open Sidebar</string>
 </resources>
