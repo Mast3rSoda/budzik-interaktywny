@@ -1,0 +1,267 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a6f0536b1f6baa0622ad59d4c15fc211",
+    "entities": [
+      {
+        "tableName": "AlarmSettings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `snoozeAmount` INTEGER NOT NULL, `snoozeDuration` INTEGER NOT NULL, `alarmName` TEXT, `alarmRingtone` TEXT, `isOn` INTEGER NOT NULL, `isVibrationOn` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "alarmID",
+            "columnName": "alarmID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "snoozeAmount",
+            "columnName": "snoozeAmount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "snoozeDuration",
+            "columnName": "snoozeDuration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alarmName",
+            "columnName": "alarmName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "alarmRingtone",
+            "columnName": "alarmRingtone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isOn",
+            "columnName": "isOn",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isVibrationOn",
+            "columnName": "isVibrationOn",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "alarmID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "DatesData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER NOT NULL, `alarmDate` INTEGER, PRIMARY KEY(`alarmID`), FOREIGN KEY(`alarmID`) REFERENCES `AlarmSettings`(`alarmID`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "alarmID",
+            "columnName": "alarmID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alarmDate",
+            "columnName": "alarmDate",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "alarmID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AlarmSettings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "alarmID"
+            ],
+            "referencedColumns": [
+              "alarmID"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "DayOfTheWeekData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER NOT NULL, `monday` INTEGER, `tuesday` INTEGER, `wednesday` INTEGER, `thursday` INTEGER, `friday` INTEGER, `saturday` INTEGER, `sunday` INTEGER, PRIMARY KEY(`alarmID`), FOREIGN KEY(`alarmID`) REFERENCES `AlarmSettings`(`alarmID`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "alarmID",
+            "columnName": "alarmID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "monday",
+            "columnName": "monday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tuesday",
+            "columnName": "tuesday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wednesday",
+            "columnName": "wednesday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "thursday",
+            "columnName": "thursday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "friday",
+            "columnName": "friday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "saturday",
+            "columnName": "saturday",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sunday",
+            "columnName": "sunday",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "alarmID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "AlarmSettings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "alarmID"
+            ],
+            "referencedColumns": [
+              "alarmID"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AlarmGames",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER NOT NULL, `gameID` INTEGER NOT NULL, `gameDifficulty` INTEGER NOT NULL, PRIMARY KEY(`alarmID`), FOREIGN KEY(`alarmID`) REFERENCES `AlarmSettings`(`alarmID`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`gameID`) REFERENCES `GameSettings`(`gameID`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "alarmID",
+            "columnName": "alarmID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameID",
+            "columnName": "gameID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameDifficulty",
+            "columnName": "gameDifficulty",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "alarmID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_AlarmGames_gameID",
+            "unique": false,
+            "columnNames": [
+              "gameID"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_AlarmGames_gameID` ON `${TABLE_NAME}` (`gameID`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "AlarmSettings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "alarmID"
+            ],
+            "referencedColumns": [
+              "alarmID"
+            ]
+          },
+          {
+            "table": "GameSettings",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "gameID"
+            ],
+            "referencedColumns": [
+              "gameID"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "GameSettings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gameID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "gameID",
+            "columnName": "gameID",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gameID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a6f0536b1f6baa0622ad59d4c15fc211')"
+    ]
+  }
+}
