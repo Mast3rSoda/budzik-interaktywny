@@ -19,9 +19,30 @@ import androidx.room.PrimaryKey;
 public class AlarmGames {
 
     @PrimaryKey
-    public int alarmID;
+    private int alarmID;
 
-    public int gameID;
+    private int gameID;
 
-    public int gameDifficulty;
+    private int gameDifficulty;
+
+    public AlarmGames(int gameID, int gameDifficulty) {
+        this.gameID = gameID;
+        this.gameDifficulty = gameDifficulty;
+    }
+
+    public void setAlarmID(int alarmID) {
+        this.alarmID = alarmID;
+    }
+
+    public int getAlarmID() {
+        return alarmID;
+    }
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public int getGameDifficulty() {
+        return gameDifficulty;
+    }
 }

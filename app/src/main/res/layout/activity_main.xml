@@ -44,12 +44,17 @@
         android:layout_below="@+id/layoutTopSection"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/alarmList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/list_view_layout"
+            android:paddingBottom="60dp"
+            android:id="@+id/alarmRecyclerView"/>
 
-        </ListView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addAlarmButton"
             android:layout_width="wrap_content"
@@ -58,9 +63,7 @@
             android:padding="20dp"
             android:layout_margin="15dp"
             android:src="@drawable/ic_baseline_add_30"
-            android:contentDescription="@string/addAlarmCD">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            android:contentDescription="@string/addAlarmCD"/>
 
     </LinearLayout>
 

@@ -7,5 +7,13 @@ import androidx.room.PrimaryKey;
 public class GameSettings {
 
     @PrimaryKey(autoGenerate = true)
-    public int gameID;
+    private int gameID;
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
 }

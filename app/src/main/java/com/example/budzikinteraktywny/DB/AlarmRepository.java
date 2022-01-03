@@ -20,7 +20,7 @@ public class AlarmRepository {
     private DayOfTheWeekModelDao dayOfTheWeekModelDao;
     private GameSettingsDao gameSettingsDao;
 
-    private LiveData<List<AlarmModel>> allAlarms;
+    private final LiveData<List<AlarmModel>> allAlarms;
 
     private AlarmRepository(Application application) {
         appDB db = appDB.getDatabase(application);
@@ -35,15 +35,21 @@ public class AlarmRepository {
 
     //functions that can not run in the main thread
 
-    void insert(AlarmModel alarmModel) {
+    void alarmModelInsert(AlarmModel alarmModel) {
         appDB.databaseWriteExecutor.execute(() -> {
             alarmModelDao.insert(alarmModel);
         });
     }
 
+    void alarmModelDelete(AlarmModel alarmModel) {
+        appDB.databaseWriteExecutor.execute(() -> {
+            alarmModelDao.delete(alarmModel);
+        });
+    }
+
     //other functions
 
-    LiveData<List<AlarmModel>> getAllAlarms() {
+    public LiveData<List<AlarmModel>> getAllAlarms() {
         return allAlarms;
     }
 

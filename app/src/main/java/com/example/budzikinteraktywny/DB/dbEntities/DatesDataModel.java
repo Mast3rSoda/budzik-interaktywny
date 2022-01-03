@@ -12,11 +12,24 @@ import java.util.Date;
 @Entity(tableName = "DatesData", foreignKeys = @ForeignKey(entity = AlarmModel.class, parentColumns = "alarmID", childColumns = "alarmID", onDelete = CASCADE))
 public class DatesDataModel {
     @PrimaryKey
-    public int alarmID;
+    private int alarmID;
 
+    private Date alarmDate;
 
-    public Date alarmDate;
+    public DatesDataModel(Date alarmDate) {
+        this.alarmDate = alarmDate;
+    }
 
+    public void setAlarmID(int alarmID) {
+        this.alarmID = alarmID;
+    }
 
+    public int getAlarmID() {
+        return alarmID;
+    }
+
+    public Date getAlarmDate() {
+        return alarmDate;
+    }
 }
 

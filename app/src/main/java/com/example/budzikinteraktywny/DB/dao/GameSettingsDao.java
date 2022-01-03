@@ -3,6 +3,7 @@ package com.example.budzikinteraktywny.DB.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Update;
 
 import com.example.budzikinteraktywny.DB.dbEntities.GameSettings;
 
@@ -14,4 +15,7 @@ public interface GameSettingsDao {
 
     @Delete
     void delete(GameSettings gameSettings);
+
+    @Update
+    void update(GameSettings gameSettings);
 }
