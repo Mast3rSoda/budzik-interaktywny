@@ -22,7 +22,7 @@ public class AlarmRepository {
 
     private final LiveData<List<AlarmModel>> allAlarms;
 
-    private AlarmRepository(Application application) {
+    public AlarmRepository(Application application) {
         appDB db = appDB.getDatabase(application);
         alarmGamesDao = db.AlarmGamesDao();
         alarmModelDao = db.AlarmModelDao();
@@ -35,13 +35,13 @@ public class AlarmRepository {
 
     //functions that can not run in the main thread
 
-    void alarmModelInsert(AlarmModel alarmModel) {
+    public void alarmModelInsert(AlarmModel alarmModel) {
         appDB.databaseWriteExecutor.execute(() -> {
             alarmModelDao.insert(alarmModel);
         });
     }
 
-    void alarmModelDelete(AlarmModel alarmModel) {
+    public void alarmModelDelete(AlarmModel alarmModel) {
         appDB.databaseWriteExecutor.execute(() -> {
             alarmModelDao.delete(alarmModel);
         });

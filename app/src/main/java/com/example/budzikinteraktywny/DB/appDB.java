@@ -46,7 +46,7 @@ public abstract class appDB extends RoomDatabase {
             synchronized (appDB.class) {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
-                            appDB.class, "database").fallbackToDestructiveMigration()
+                            appDB.class, "database").addCallback(roomCallback).fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -55,11 +55,11 @@ public abstract class appDB extends RoomDatabase {
     }
 
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-        private AlarmModelDao alarmModelDao = appDB.instance.AlarmModelDao();
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             appDB.databaseWriteExecutor.execute(() -> {
+                AlarmModelDao alarmModelDao = instance.AlarmModelDao();
                 alarmModelDao.insert(new AlarmModel(1, 1, "a", "a", true, true));
             });
         }
