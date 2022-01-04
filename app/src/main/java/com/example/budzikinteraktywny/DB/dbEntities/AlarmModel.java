@@ -12,15 +12,20 @@ public class AlarmModel {
     private int snoozeAmount;
     private int snoozeDuration;
 
+    private int alarmHour;
+    private int alarmMinute;
+
     private String alarmName;
     private String alarmRingtone;
 
     private boolean isOn;
     private boolean isVibrationOn;
 
-    public AlarmModel(int snoozeAmount, int snoozeDuration, String alarmName, String alarmRingtone, boolean isOn, boolean isVibrationOn) {
+    public AlarmModel(int snoozeAmount, int snoozeDuration, int alarmHour, int alarmMinute, String alarmName, String alarmRingtone, boolean isOn, boolean isVibrationOn) {
         this.snoozeAmount = snoozeAmount;
         this.snoozeDuration = snoozeDuration;
+        this.alarmHour = alarmHour;
+        this.alarmMinute = alarmMinute;
         this.alarmName = alarmName;
         this.alarmRingtone = alarmRingtone;
         this.isOn = isOn;
@@ -41,6 +46,14 @@ public class AlarmModel {
 
     public int getSnoozeDuration() {
         return snoozeDuration;
+    }
+
+    public int getAlarmHour() {
+        return alarmHour;
+    }
+
+    public int getAlarmMinute() {
+        return alarmMinute;
     }
 
     public String getAlarmName() {

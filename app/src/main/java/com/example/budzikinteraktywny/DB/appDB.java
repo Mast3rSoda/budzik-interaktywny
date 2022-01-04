@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 
 import kotlin.jvm.Volatile;
 
-@Database(entities = {AlarmModel.class, DatesDataModel.class, DayOfTheWeekModel.class, AlarmGames.class, GameSettings.class}, version = 1)
+@Database(entities = {AlarmModel.class, DatesDataModel.class, DayOfTheWeekModel.class, AlarmGames.class, GameSettings.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class appDB extends RoomDatabase {
     public abstract AlarmModelDao AlarmModelDao();
@@ -46,7 +46,9 @@ public abstract class appDB extends RoomDatabase {
             synchronized (appDB.class) {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
-                            appDB.class, "database").addCallback(roomCallback).fallbackToDestructiveMigration()
+                            appDB.class, "database")
+                            .fallbackToDestructiveMigration()
+                            .addCallback(roomCallback)
                             .build();
                 }
             }
@@ -56,11 +58,11 @@ public abstract class appDB extends RoomDatabase {
 
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            appDB.databaseWriteExecutor.execute(() -> {
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+            databaseWriteExecutor.execute(() -> {
                 AlarmModelDao alarmModelDao = instance.AlarmModelDao();
-                alarmModelDao.insert(new AlarmModel(1, 1, "a", "a", true, true));
+                alarmModelDao.insert(new AlarmModel(1, 1, 12, 1, "a", "a", true, true));
             });
         }
     };

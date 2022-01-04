@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    >
 
     <LinearLayout
         android:id="@+id/listViewAbove"
@@ -34,6 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="TestName"
                 android:textSize="18sp">
 
@@ -57,14 +61,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingHorizontal="10dp"
-            app:showText="false"
             android:text=" "
-            android:textOn="Add time till ring">
+            app:showText="false">
 
         </androidx.appcompat.widget.SwitchCompat>
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/listViewAbove"
@@ -87,23 +92,37 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_baseline_add_20" />
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_baseline_add_20" />
+
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_baseline_add_20" />
+
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_baseline_add_20" />
+
+
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/buttons"
+        android:background="?android:attr/listDivider" />
+
+
 </RelativeLayout>

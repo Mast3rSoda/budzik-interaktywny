@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a6f0536b1f6baa0622ad59d4c15fc211",
+    "identityHash": "7c0258439bd4412f42f8d6e4ae1635a5",
     "entities": [
       {
         "tableName": "AlarmSettings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `snoozeAmount` INTEGER NOT NULL, `snoozeDuration` INTEGER NOT NULL, `alarmName` TEXT, `alarmRingtone` TEXT, `isOn` INTEGER NOT NULL, `isVibrationOn` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alarmID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `snoozeAmount` INTEGER NOT NULL, `snoozeDuration` INTEGER NOT NULL, `alarmHour` INTEGER NOT NULL, `alarmMinute` INTEGER NOT NULL, `alarmName` TEXT, `alarmRingtone` TEXT, `isOn` INTEGER NOT NULL, `isVibrationOn` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "alarmID",
@@ -23,6 +23,18 @@
           {
             "fieldPath": "snoozeDuration",
             "columnName": "snoozeDuration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alarmHour",
+            "columnName": "alarmHour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alarmMinute",
+            "columnName": "alarmMinute",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -261,7 +273,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a6f0536b1f6baa0622ad59d4c15fc211')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7c0258439bd4412f42f8d6e4ae1635a5')"
     ]
   }
 }
