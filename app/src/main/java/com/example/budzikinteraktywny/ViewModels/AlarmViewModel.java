@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.viewModels;
+package com.example.budzikinteraktywny.ViewModels;
 
 import android.app.Application;
 
@@ -28,6 +28,10 @@ public class AlarmViewModel extends AndroidViewModel {
 
     public void alarmModelDelete(AlarmModel alarmModel) {
         repository.alarmModelDelete(alarmModel);
+    }
+
+    public void deleteAllAlarms() {
+        repository.deleteAllAlarms();
     }
 
     public LiveData<List<AlarmModel>> getAllAlarms() {

@@ -20,6 +20,7 @@ public class DayOfTheWeekModel {
     private Boolean saturday;
     private Boolean sunday;
 
+
     public DayOfTheWeekModel(Boolean monday, Boolean tuesday, Boolean wednesday, Boolean thursday, Boolean friday, Boolean saturday, Boolean sunday) {
         this.monday = monday;
         this.tuesday = tuesday;

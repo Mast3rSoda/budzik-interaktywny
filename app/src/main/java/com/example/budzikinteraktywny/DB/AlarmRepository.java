@@ -47,6 +47,12 @@ public class AlarmRepository {
         });
     }
 
+    public void deleteAllAlarms() {
+        appDB.databaseWriteExecutor.execute(() -> {
+            alarmModelDao.deleteAllAlarms();
+        });
+    }
+
     //other functions
 
     public LiveData<List<AlarmModel>> getAllAlarms() {

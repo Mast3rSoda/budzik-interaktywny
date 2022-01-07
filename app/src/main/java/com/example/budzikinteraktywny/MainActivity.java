@@ -1,24 +1,21 @@
 package com.example.budzikinteraktywny;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.BaseAdapter;
 
-import com.example.budzikinteraktywny.DB.appDB;
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmModel;
-import com.example.budzikinteraktywny.alarmRecycler.AlarmAdapter;
-import com.example.budzikinteraktywny.viewModels.AlarmViewModel;
-
-import java.util.List;
+import com.example.budzikinteraktywny.Adapters.AlarmAdapter;
+import com.example.budzikinteraktywny.ViewModels.AlarmViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
-    private AlarmViewModel alarmViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +29,18 @@ public class MainActivity extends AppCompatActivity {
         AlarmAdapter alarmAdapter = new AlarmAdapter();
         alarmRecyclerView.setAdapter(alarmAdapter);
 
-        alarmViewModel = new ViewModelProvider(this).get(AlarmViewModel.class);
-        alarmViewModel.getAllAlarms().observe(this, alarmModels -> {
-        alarmAdapter.setAlarms(alarmModels);
+        AlarmViewModel alarmViewModel = new ViewModelProvider(this).get(AlarmViewModel.class);
+        alarmViewModel.getAllAlarms().observe(this, alarmAdapter::setAlarms);
+
+
+        FloatingActionButton fab = findViewById(R.id.addAlarmButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
         });
     }
+
+
 }

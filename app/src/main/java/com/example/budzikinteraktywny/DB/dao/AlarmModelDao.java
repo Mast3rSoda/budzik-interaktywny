@@ -25,6 +25,9 @@ public interface AlarmModelDao {
     @Update
     void update(AlarmModel alarmModel);
 
+    @Query("DELETE FROM AlarmSettings")
+    void deleteAllAlarms();
+
     @Query("SELECT * From AlarmSettings ORDER BY alarmID DESC")
     LiveData<List<AlarmModel>> getAllOrdered();
 

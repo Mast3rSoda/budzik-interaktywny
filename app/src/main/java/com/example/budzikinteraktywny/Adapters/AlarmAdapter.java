@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.alarmRecycler;
+package com.example.budzikinteraktywny.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.alarmViewHol
     @Override
     public alarmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_view_layout, parent, false);
+                .inflate(R.layout.item_list, parent, false);
         return new alarmViewHolder(itemView);
     }
 
@@ -56,6 +56,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.alarmViewHol
             daysOfWeekSelected = itemView.findViewById(R.id.daysOfWeekSelected);
             onOffSwitch = itemView.findViewById(R.id.onOffSwitch);
         }
+
     }
 
 }
