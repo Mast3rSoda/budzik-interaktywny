@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.DB;
+package com.example.budzikinteraktywny.db;
 
 
 import android.content.Context;
@@ -10,22 +10,20 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.budzikinteraktywny.DB.dao.AlarmGamesDao;
-import com.example.budzikinteraktywny.DB.dao.AlarmModelDao;
-import com.example.budzikinteraktywny.DB.dao.DatesDataModelDao;
-import com.example.budzikinteraktywny.DB.dao.DayOfTheWeekModelDao;
-import com.example.budzikinteraktywny.DB.dao.GameSettingsDao;
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmGames;
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmModel;
-import com.example.budzikinteraktywny.DB.dbEntities.Converters;
-import com.example.budzikinteraktywny.DB.dbEntities.DatesDataModel;
-import com.example.budzikinteraktywny.DB.dbEntities.DayOfTheWeekModel;
-import com.example.budzikinteraktywny.DB.dbEntities.GameSettings;
+import com.example.budzikinteraktywny.db.dao.AlarmGamesDao;
+import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
+import com.example.budzikinteraktywny.db.dao.DatesDataModelDao;
+import com.example.budzikinteraktywny.db.dao.DayOfTheWeekModelDao;
+import com.example.budzikinteraktywny.db.dao.GameSettingsDao;
+import com.example.budzikinteraktywny.db.dbEntity.AlarmGames;
+import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
+import com.example.budzikinteraktywny.db.dbEntity.Converters;
+import com.example.budzikinteraktywny.db.dbEntity.DatesDataModel;
+import com.example.budzikinteraktywny.db.dbEntity.DayOfTheWeekModel;
+import com.example.budzikinteraktywny.db.dbEntity.GameSettings;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import kotlin.jvm.Volatile;
 
 @Database(entities = {AlarmModel.class, DatesDataModel.class, DayOfTheWeekModel.class, AlarmGames.class, GameSettings.class}, version = 2)
 @TypeConverters({Converters.class})

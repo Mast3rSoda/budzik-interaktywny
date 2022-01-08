@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.Adapters;
+package com.example.budzikinteraktywny.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,24 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmModel;
+import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
 import com.example.budzikinteraktywny.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.alarmViewHolder> {
+public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
     private List<AlarmModel> alarms = new ArrayList<>();
     @NonNull
     @Override
-    public alarmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AlarmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list, parent, false);
-        return new alarmViewHolder(itemView);
+        return new AlarmViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull alarmViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AlarmViewHolder holder, int position) {
         AlarmModel currentAlarm = alarms.get(position);
         holder.alarmTime.setText(new StringBuilder().append(String.valueOf(currentAlarm.getAlarmHour())).append(":").append(String.valueOf(currentAlarm.getAlarmMinute())));
         holder.alarmName.setText(currentAlarm.getAlarmName());
@@ -43,13 +43,13 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.alarmViewHol
         notifyDataSetChanged();
     }
 
-    class alarmViewHolder extends RecyclerView.ViewHolder {
-        private TextView alarmTime;
-        private TextView alarmName;
+    static class AlarmViewHolder extends RecyclerView.ViewHolder {
+        private final TextView alarmTime;
+        private final TextView alarmName;
         private TextView daysOfWeekSelected;
-        private SwitchCompat onOffSwitch;
+        private final SwitchCompat onOffSwitch;
 
-        public alarmViewHolder(@NonNull View itemView) {
+        public AlarmViewHolder(@NonNull View itemView) {
             super(itemView);
             alarmTime = itemView.findViewById(R.id.alarmTime);
             alarmName = itemView.findViewById(R.id.alarmName);

@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.Adapters;
+package com.example.budzikinteraktywny.adapter;
 
 
 import android.view.LayoutInflater;
@@ -15,6 +15,8 @@ import com.example.budzikinteraktywny.model.ButtonItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder> {
     private List<ButtonItem> items = new ArrayList<>();
@@ -28,7 +30,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     @Override
     public ButtonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        return new ButtonViewHolder(layoutInflater.inflate(R.layout.item_button, parent, false));
+        return new ButtonViewHolder(layoutInflater.
+                inflate(R.layout.item_button, parent, false));
     }
 
     @Override
@@ -53,8 +56,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         return items.size();
     }
 
-    class ButtonViewHolder extends RecyclerView.ViewHolder {
-        Button button;
+    static class ButtonViewHolder extends RecyclerView.ViewHolder {
+        private final Button button;
 
         public ButtonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,9 +66,10 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     }
 
     public void setItems(List<ButtonItem> items) {
-
         this.items = items;
         notifyDataSetChanged();
     }
+
+
 }
 

@@ -1,11 +1,11 @@
-package com.example.budzikinteraktywny.DB.dao;
+package com.example.budzikinteraktywny.db.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 
-import com.example.budzikinteraktywny.DB.dbEntities.GameSettings;
+import com.example.budzikinteraktywny.db.dbEntity.GameSettings;
 
 @Dao
 public interface GameSettingsDao {

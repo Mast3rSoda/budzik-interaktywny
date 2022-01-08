@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.ViewModels;
+package com.example.budzikinteraktywny.view_model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,9 +8,10 @@ import com.example.budzikinteraktywny.model.ButtonItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AddAlarmViewModel extends ViewModel {
-    private MutableLiveData <List<ButtonItem>> items = new MutableLiveData<>();
+    private final MutableLiveData <List<ButtonItem>> items = new MutableLiveData<>();
 
     public AddAlarmViewModel() {
         List<ButtonItem> list = new ArrayList<>();
@@ -37,4 +38,13 @@ public class AddAlarmViewModel extends ViewModel {
         }
 
     }
+
+    public boolean[] getButtonValues() {
+        boolean[] values = new boolean[7];
+        for (int i = 0; i < 7; i++) {
+            values[i] =  Objects.requireNonNull(items.getValue()).get(i).isEnabled();
+        }
+        return values;
+    }
+
 }

@@ -1,15 +1,15 @@
-package com.example.budzikinteraktywny.DB;
+package com.example.budzikinteraktywny.db;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.budzikinteraktywny.DB.dao.AlarmGamesDao;
-import com.example.budzikinteraktywny.DB.dao.AlarmModelDao;
-import com.example.budzikinteraktywny.DB.dao.DatesDataModelDao;
-import com.example.budzikinteraktywny.DB.dao.DayOfTheWeekModelDao;
-import com.example.budzikinteraktywny.DB.dao.GameSettingsDao;
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmModel;
+import com.example.budzikinteraktywny.db.dao.AlarmGamesDao;
+import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
+import com.example.budzikinteraktywny.db.dao.DatesDataModelDao;
+import com.example.budzikinteraktywny.db.dao.DayOfTheWeekModelDao;
+import com.example.budzikinteraktywny.db.dao.GameSettingsDao;
+import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
 
 import java.util.List;
 

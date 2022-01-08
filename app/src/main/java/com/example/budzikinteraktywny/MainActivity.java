@@ -1,26 +1,35 @@
 package com.example.budzikinteraktywny;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.BaseAdapter;
+import android.os.Parcelable;
+import android.util.Log;
 
-import com.example.budzikinteraktywny.Adapters.AlarmAdapter;
-import com.example.budzikinteraktywny.ViewModels.AlarmViewModel;
+import com.example.budzikinteraktywny.adapter.AlarmAdapter;
+import com.example.budzikinteraktywny.view_model.AlarmViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
+
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int ADD_ALARM_RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         RecyclerView alarmRecyclerView = findViewById(R.id.alarmRecyclerView);
         alarmRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -34,13 +43,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         FloatingActionButton fab = findViewById(R.id.addAlarmButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, AddAlarmActivity.class);
+            launcher.launch(intent);
         });
     }
+
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    assert data != null;
+                    String name = data.getStringExtra(AddAlarmActivity.EXTRA_NAME);
+                    boolean[] values = data.getBooleanArrayExtra(AddAlarmActivity.EXTRA_VALUES);
+                }
+            }
+    );
 
 
 }

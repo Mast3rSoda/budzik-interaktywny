@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.ViewModels;
+package com.example.budzikinteraktywny.view_model;
 
 import android.app.Application;
 
@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.budzikinteraktywny.DB.AlarmRepository;
-import com.example.budzikinteraktywny.DB.dbEntities.AlarmModel;
+import com.example.budzikinteraktywny.db.AlarmRepository;
+import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
 
 import java.util.List;
 
 public class AlarmViewModel extends AndroidViewModel {
-    private AlarmRepository repository;
-    private LiveData<List<AlarmModel>> allAlarms;
+    private final AlarmRepository repository;
+    private final LiveData<List<AlarmModel>> allAlarms;
 
 
     public AlarmViewModel(@NonNull Application application) {

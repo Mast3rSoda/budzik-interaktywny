@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.DB.dbEntities;
+package com.example.budzikinteraktywny.db.dbEntity;
 
 
 import androidx.room.Entity;

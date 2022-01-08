@@ -40,7 +40,21 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
 
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:text="Save"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+    </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>

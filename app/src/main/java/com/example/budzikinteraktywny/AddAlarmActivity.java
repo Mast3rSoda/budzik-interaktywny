@@ -1,32 +1,38 @@
 package com.example.budzikinteraktywny;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.budzikinteraktywny.Adapters.ButtonAdapter;
-import com.example.budzikinteraktywny.Adapters.ButtonAdapterInteractions;
-import com.example.budzikinteraktywny.ViewModels.AddAlarmViewModel;
-import com.example.budzikinteraktywny.ViewModels.AlarmViewModel;
-import com.example.budzikinteraktywny.model.ButtonItem;
+import com.example.budzikinteraktywny.adapter.ButtonAdapter;
+import com.example.budzikinteraktywny.adapter.ButtonAdapterInteractions;
+import com.example.budzikinteraktywny.view_model.AddAlarmViewModel;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapterInteractions {
-    private TimePicker timePicker;
+    public static final String EXTRA_NAME =
+            "com.example.budzikinteraktywny.EXTRA_NAME";
+    public static final String EXTRA_VALUES =
+            "com.example.budzikinteraktywny.EXTRA_VALUES";
+
+
     private EditText editTextAlarmName;
-    private RecyclerView recyclerView;
     ButtonAdapter buttonAdapter = new ButtonAdapter(this);
     AddAlarmViewModel viewModel;
-
 
 
     @Override
@@ -34,20 +40,39 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_alarm_layout);
 
-        timePicker = findViewById(R.id.timePicker);
+        TimePicker timePicker = findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+
+        Button button = findViewById(R.id.saveButton);
+        button.setOnClickListener(view -> saveAlarm());
+
         editTextAlarmName = findViewById(R.id.editAlarmName);
-        recyclerView = findViewById(R.id.buttonLayout);
+        RecyclerView recyclerView = findViewById(R.id.buttonLayout);
         recyclerView.setAdapter(buttonAdapter);
 
         viewModel = new ViewModelProvider(this).get(AddAlarmViewModel.class);
-        viewModel.getItems().observe(this, buttonItems -> {
-            buttonAdapter.setItems(buttonItems);
-        });
+        viewModel.getItems().observe(this, buttonItems -> buttonAdapter.setItems(buttonItems));
 
     }
 
     @Override
     public void onButtonClick(int pos) {
         viewModel.toggleItem(pos);
+    }
+
+    public void saveAlarm() {
+        String title = editTextAlarmName.getText().toString();
+        boolean[] values = viewModel.getButtonValues();
+
+        if (title.trim().isEmpty()) {
+            Toast.makeText(this, "Please enter a title", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_NAME, title);
+            intent.putExtra(EXTRA_VALUES, values);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+
     }
 }
