@@ -57,6 +57,10 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         notifyDataSetChanged();
     }
 
+    public AlarmModel getAlarmAt(int position) {
+        return alarms.get(position);
+    }
+
     static class AlarmViewHolder extends RecyclerView.ViewHolder {
         private final TextView alarmTime;
         private final TextView alarmName;
@@ -72,7 +76,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         }
 
     }
-
+    //bruh
     private void getRepeatDays(DayOfTheWeekModel list) {
         if(Boolean.TRUE.equals(list.getMonday()))
             data = data.concat("Mon");
