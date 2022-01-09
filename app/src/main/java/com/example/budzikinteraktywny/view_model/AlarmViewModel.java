@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.budzikinteraktywny.db.AlarmRepository;
-import com.example.budzikinteraktywny.db.SimplerCallback;
 import com.example.budzikinteraktywny.db.entities.AlarmModel;
 import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
 
