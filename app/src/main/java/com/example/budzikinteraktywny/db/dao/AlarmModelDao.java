@@ -6,9 +6,10 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
+import com.example.budzikinteraktywny.db.entities.AlarmModel;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public interface AlarmModelDao {
 
     @Insert
-    void insert(AlarmModel alarmModel);
+    long insert(AlarmModel alarmModel);
 
     @Delete
     void delete(AlarmModel alarmModel);

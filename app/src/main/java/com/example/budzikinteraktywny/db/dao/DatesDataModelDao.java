@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 
-import com.example.budzikinteraktywny.db.dbEntity.DatesDataModel;
+import com.example.budzikinteraktywny.db.entities.DatesDataModel;
 
 @Dao
 public interface DatesDataModelDao {

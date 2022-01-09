@@ -28,8 +28,13 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
             "com.example.budzikinteraktywny.EXTRA_NAME";
     public static final String EXTRA_VALUES =
             "com.example.budzikinteraktywny.EXTRA_VALUES";
+    public static final String EXTRA_HOUR =
+            "com.example.budzikinteraktywny.EXTRA_HOUR";
+    public static final String EXTRA_MINUTE =
+            "com.example.budzikinteraktywny.EXTRA_MINUTE";
 
 
+    private TimePicker timePicker;
     private EditText editTextAlarmName;
     ButtonAdapter buttonAdapter = new ButtonAdapter(this);
     AddAlarmViewModel viewModel;
@@ -40,7 +45,7 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_alarm_layout);
 
-        TimePicker timePicker = findViewById(R.id.timePicker);
+        timePicker = findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
 
         Button button = findViewById(R.id.saveButton);
@@ -61,18 +66,21 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
     }
 
     public void saveAlarm() {
+        int hour = timePicker.getHour();
+        int minute = timePicker.getMinute();
         String title = editTextAlarmName.getText().toString();
         boolean[] values = viewModel.getButtonValues();
 
         if (title.trim().isEmpty()) {
-            Toast.makeText(this, "Please enter a title", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent();
-            intent.putExtra(EXTRA_NAME, title);
-            intent.putExtra(EXTRA_VALUES, values);
-            setResult(RESULT_OK, intent);
-            finish();
+            title = "Alarm";
         }
 
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_NAME, title);
+        intent.putExtra(EXTRA_HOUR, hour);
+        intent.putExtra(EXTRA_MINUTE, minute);
+        intent.putExtra(EXTRA_VALUES, values);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

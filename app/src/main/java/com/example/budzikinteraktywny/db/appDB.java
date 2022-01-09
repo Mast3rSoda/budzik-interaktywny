@@ -15,12 +15,12 @@ import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
 import com.example.budzikinteraktywny.db.dao.DatesDataModelDao;
 import com.example.budzikinteraktywny.db.dao.DayOfTheWeekModelDao;
 import com.example.budzikinteraktywny.db.dao.GameSettingsDao;
-import com.example.budzikinteraktywny.db.dbEntity.AlarmGames;
-import com.example.budzikinteraktywny.db.dbEntity.AlarmModel;
-import com.example.budzikinteraktywny.db.dbEntity.Converters;
-import com.example.budzikinteraktywny.db.dbEntity.DatesDataModel;
-import com.example.budzikinteraktywny.db.dbEntity.DayOfTheWeekModel;
-import com.example.budzikinteraktywny.db.dbEntity.GameSettings;
+import com.example.budzikinteraktywny.db.entities.AlarmGames;
+import com.example.budzikinteraktywny.db.entities.AlarmModel;
+import com.example.budzikinteraktywny.db.entities.Converters;
+import com.example.budzikinteraktywny.db.entities.DatesDataModel;
+import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
+import com.example.budzikinteraktywny.db.entities.GameSettings;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,7 +37,7 @@ public abstract class appDB extends RoomDatabase {
     public static appDB instance;
 
     static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(4);
+            Executors.newFixedThreadPool(8);
 
     public static synchronized appDB getDatabase(final Context context) {
         if (instance == null) {
@@ -46,7 +46,6 @@ public abstract class appDB extends RoomDatabase {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                             appDB.class, "database")
                             .fallbackToDestructiveMigration()
-                            .addCallback(roomCallback)
                             .build();
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.db.dbEntity;
+package com.example.budzikinteraktywny.db.entities;
 
 import androidx.room.TypeConverter;
 

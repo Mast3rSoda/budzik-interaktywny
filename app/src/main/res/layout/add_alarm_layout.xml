@@ -16,7 +16,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/timePicker"
         android:layout_margin="12dp"
-        android:hint="Alarm Name" />
+        android:hint="Alarm Name"
+        android:importantForAutofill="no"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:id="@+id/repeatText"
@@ -41,6 +45,8 @@
 
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

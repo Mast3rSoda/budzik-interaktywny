@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny.db.dbEntity;
+package com.example.budzikinteraktywny.db.entities;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -7,7 +7,11 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "DayOfTheWeekData", foreignKeys = @ForeignKey(entity = AlarmModel.class, parentColumns = "alarmID", childColumns = "alarmID", onDelete = CASCADE))
+@Entity(tableName = "DayOfTheWeekData",
+        foreignKeys = @ForeignKey(entity = AlarmModel.class,
+                parentColumns = "alarmID",
+                childColumns = "alarmID",
+                onDelete = CASCADE))
 public class DayOfTheWeekModel {
     @PrimaryKey
     private int alarmID;
@@ -21,7 +25,8 @@ public class DayOfTheWeekModel {
     private Boolean sunday;
 
 
-    public DayOfTheWeekModel(Boolean monday, Boolean tuesday, Boolean wednesday, Boolean thursday, Boolean friday, Boolean saturday, Boolean sunday) {
+    public DayOfTheWeekModel(int alarmID, Boolean monday, Boolean tuesday, Boolean wednesday, Boolean thursday, Boolean friday, Boolean saturday, Boolean sunday) {
+        this.alarmID = alarmID;
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
@@ -29,10 +34,6 @@ public class DayOfTheWeekModel {
         this.friday = friday;
         this.saturday = saturday;
         this.sunday = sunday;
-    }
-
-    public void setAlarmID(int alarmID) {
-        this.alarmID = alarmID;
     }
 
     public int getAlarmID() {

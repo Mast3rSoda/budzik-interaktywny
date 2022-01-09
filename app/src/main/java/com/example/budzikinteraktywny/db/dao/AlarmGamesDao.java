@@ -5,7 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 
-import com.example.budzikinteraktywny.db.dbEntity.AlarmGames;
+import com.example.budzikinteraktywny.db.entities.AlarmGames;
 
 @Dao
 public interface AlarmGamesDao {
