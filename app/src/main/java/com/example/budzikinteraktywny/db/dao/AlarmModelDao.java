@@ -31,4 +31,7 @@ public interface AlarmModelDao {
     @Query("SELECT * From AlarmSettings ORDER BY alarmID DESC")
     LiveData<List<AlarmModel>> getAllOrdered();
 
+    @Query("UPDATE AlarmSettings SET isOn = :isOn WHERE alarmID = :id")
+    void updateIsOn(boolean isOn, int id);
+
 }

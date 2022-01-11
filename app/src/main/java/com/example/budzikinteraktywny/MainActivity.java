@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         //Might use MediatorLiveData? Cause this is so fucking ghetto
         alarmViewModel.getAllAlarms().observe(this, alarmModels -> {
             alarmViewModel.getAllDays().observe(this, allDays -> {
-                alarmAdapter.setAlarms(alarmModels, allDays);
+                if (alarmModels.size() == allDays.size())
+                    alarmAdapter.setAlarms(alarmModels, allDays);
             });
         });
 
@@ -89,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
+
+    public void setIsOn(boolean b, int id) {
+        alarmViewModel.updateIsOn(b, id);
+    }
 
 
 }

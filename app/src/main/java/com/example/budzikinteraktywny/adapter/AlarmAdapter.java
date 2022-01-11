@@ -4,15 +4,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budzikinteraktywny.MainActivity;
+import com.example.budzikinteraktywny.db.AlarmRepository;
+import com.example.budzikinteraktywny.db.dao.AlarmGamesDao;
+import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
 import com.example.budzikinteraktywny.db.entities.AlarmModel;
 import com.example.budzikinteraktywny.R;
 import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
+import com.example.budzikinteraktywny.view_model.AlarmViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +47,12 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         holder.alarmTime.setText(new StringBuilder().append(hour).append(":").append(minute));
         holder.alarmName.setText(currentAlarm.getAlarmName());
         holder.onOffSwitch.setChecked(currentAlarm.isOn());
+        holder.onOffSwitch.setOnClickListener(view -> {
+            if(currentAlarm.isOn())
+                ((MainActivity) view.getContext()).setIsOn(false, currentAlarm.getAlarmID());
+            else
+                ((MainActivity) view.getContext()).setIsOn(true, currentAlarm.getAlarmID());
+        });
         data = "";
         getRepeatDays(currentDay);
         holder.daysOfWeekSelected.setText(data);

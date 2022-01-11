@@ -55,6 +55,12 @@ public class AlarmRepository {
         return liveData;
     }
 
+    public void alarmModelUpdate(AlarmModel alarmModel) {
+        appDB.databaseWriteExecutor.execute(() -> {
+            alarmModelDao.update(alarmModel);
+        });
+    }
+
     public void alarmModelDelete(AlarmModel alarmModel) {
         appDB.databaseWriteExecutor.execute(() -> {
             alarmModelDao.delete(alarmModel);
@@ -64,6 +70,12 @@ public class AlarmRepository {
     public void deleteAllAlarms() {
         appDB.databaseWriteExecutor.execute(() -> {
             alarmModelDao.deleteAllAlarms();
+        });
+    }
+
+    public void updateIsOn(boolean isOn, int id) {
+        appDB.databaseWriteExecutor.execute(() -> {
+            alarmModelDao.updateIsOn(isOn, id);
         });
     }
 

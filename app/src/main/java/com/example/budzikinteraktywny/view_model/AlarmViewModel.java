@@ -24,7 +24,7 @@ public class AlarmViewModel extends AndroidViewModel {
         allAlarms = repository.getAllAlarms();
         allDays = repository.getAllDays();
     }
-//
+
 //    public void alarmModelInsert(AlarmModel alarmModel, SimpleCallback<Long> callback) {
 //        repository.alarmModelInsert(alarmModel, callback);
 //    }
@@ -39,6 +39,10 @@ public class AlarmViewModel extends AndroidViewModel {
 
     public void deleteAllAlarms() {
         repository.deleteAllAlarms();
+    }
+
+    public void updateIsOn(boolean isOn, int id) {
+        repository.updateIsOn(isOn, id);
     }
 
     public void dayOfTheWeekInsert(DayOfTheWeekModel dayOfTheWeekModel) {
