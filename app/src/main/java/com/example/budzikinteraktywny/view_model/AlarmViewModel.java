@@ -37,6 +37,10 @@ public class AlarmViewModel extends AndroidViewModel {
         repository.alarmModelDelete(alarmModel);
     }
 
+    public void alarmModelUpdate(AlarmModel alarmModel) {
+        repository.alarmModelUpdate(alarmModel);
+    }
+
     public void deleteAllAlarms() {
         repository.deleteAllAlarms();
     }
@@ -51,6 +55,10 @@ public class AlarmViewModel extends AndroidViewModel {
 
     public void dayOfTheWeekDelete(DayOfTheWeekModel dayOfTheWeekModel) {
         repository.dayOfTheWeekDelete(dayOfTheWeekModel);
+    }
+
+    public void dayOfTheWeekUpdate(DayOfTheWeekModel dayOfTheWeekModel) {
+        repository.dayOfTheWeekUpdate(dayOfTheWeekModel);
     }
 
     public LiveData<List<AlarmModel>> getAllAlarms() {

@@ -91,6 +91,12 @@ public class AlarmRepository {
         });
     }
 
+    public void dayOfTheWeekUpdate(DayOfTheWeekModel dayOfTheWeekModel) {
+        appDB.databaseWriteExecutor.execute(() -> {
+            dayOfTheWeekModelDao.update(dayOfTheWeekModel);
+        });
+    }
+
     //other functions
 
     public LiveData<List<AlarmModel>> getAllAlarms() {

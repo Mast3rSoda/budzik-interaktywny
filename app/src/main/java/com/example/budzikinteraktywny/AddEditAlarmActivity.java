@@ -21,9 +21,12 @@ import com.example.budzikinteraktywny.view_model.AddAlarmViewModel;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapterInteractions {
+public class AddEditAlarmActivity extends AppCompatActivity implements ButtonAdapterInteractions {
+    public static final String EXTRA_ID =
+            "com.example.budzikinteraktywny.EXTRA_ID";
     public static final String EXTRA_NAME =
             "com.example.budzikinteraktywny.EXTRA_NAME";
     public static final String EXTRA_VALUES =
@@ -33,9 +36,12 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
     public static final String EXTRA_MINUTE =
             "com.example.budzikinteraktywny.EXTRA_MINUTE";
 
+    public static final int DEFAULT_VALUE = 1;
+
 
     private TimePicker timePicker;
     private EditText editTextAlarmName;
+    private boolean firstLoad = true;
     ButtonAdapter buttonAdapter = new ButtonAdapter(this);
     AddAlarmViewModel viewModel;
 
@@ -55,9 +61,25 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
         RecyclerView recyclerView = findViewById(R.id.buttonLayout);
         recyclerView.setAdapter(buttonAdapter);
 
-        viewModel = new ViewModelProvider(this).get(AddAlarmViewModel.class);
-        viewModel.getItems().observe(this, buttonItems -> buttonAdapter.setItems(buttonItems));
+        Intent intent = getIntent();
 
+        viewModel = new ViewModelProvider(this).get(AddAlarmViewModel.class);
+        viewModel.getItems().observe(this, buttonItems -> {
+                    if (intent.hasExtra(EXTRA_ID) && firstLoad) {
+                        for (int i = 0; i < 7; i++) {
+                            buttonItems.get(i).setEnabled(intent.getBooleanArrayExtra(EXTRA_VALUES)[i]);
+                        }
+                        firstLoad = false;
+                    }
+                    buttonAdapter.setItems(buttonItems);
+
+                }
+        );
+        if (intent.hasExtra(EXTRA_ID)) {
+            timePicker.setHour(intent.getIntExtra(EXTRA_HOUR, DEFAULT_VALUE));
+            timePicker.setMinute(intent.getIntExtra(EXTRA_MINUTE, DEFAULT_VALUE));
+            editTextAlarmName.setText(intent.getStringExtra(EXTRA_NAME));
+        }
     }
 
     @Override
@@ -80,6 +102,13 @@ public class AddAlarmActivity extends AppCompatActivity implements ButtonAdapter
         intent.putExtra(EXTRA_HOUR, hour);
         intent.putExtra(EXTRA_MINUTE, minute);
         intent.putExtra(EXTRA_VALUES, values);
+
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1) {
+            intent.putExtra(EXTRA_ID, id);
+            setResult(MainActivity.RESULT_EDIT, intent);
+            finish();
+        }
         setResult(RESULT_OK, intent);
         finish();
     }

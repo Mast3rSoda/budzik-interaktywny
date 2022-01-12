@@ -12,6 +12,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budzikinteraktywny.MainActivity;
+import com.example.budzikinteraktywny.callbacks.OnCardClick;
 import com.example.budzikinteraktywny.db.AlarmRepository;
 import com.example.budzikinteraktywny.db.dao.AlarmGamesDao;
 import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
@@ -24,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
-    private List<AlarmModel> alarms = new ArrayList<>();
-    private List<DayOfTheWeekModel> days = new ArrayList<>();
+    private static List<AlarmModel> alarms = new ArrayList<>();
+    private static List<DayOfTheWeekModel> days = new ArrayList<>();
     private String data = "";
+    private static OnCardClick cardClickListener;
 
     @NonNull
     @Override
@@ -48,10 +50,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         holder.alarmName.setText(currentAlarm.getAlarmName());
         holder.onOffSwitch.setChecked(currentAlarm.isOn());
         holder.onOffSwitch.setOnClickListener(view -> {
-            if(currentAlarm.isOn())
-                ((MainActivity) view.getContext()).setIsOn(false, currentAlarm.getAlarmID());
-            else
-                ((MainActivity) view.getContext()).setIsOn(true, currentAlarm.getAlarmID());
+            ((MainActivity) view.getContext()).setIsOn(!currentAlarm.isOn(), currentAlarm.getAlarmID());
         });
         data = "";
         getRepeatDays(currentDay);
@@ -64,8 +63,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
     }
 
     public void setAlarms(List<AlarmModel> alarms, List<DayOfTheWeekModel> days) {
-        this.alarms = alarms;
-        this.days = days;
+        AlarmAdapter.alarms = alarms;
+        AlarmAdapter.days = days;
         notifyDataSetChanged();
     }
 
@@ -85,43 +84,57 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             alarmName = itemView.findViewById(R.id.alarmName);
             daysOfWeekSelected = itemView.findViewById(R.id.daysOfWeekSelected);
             onOffSwitch = itemView.findViewById(R.id.onOffSwitch);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (cardClickListener != null && position != RecyclerView.NO_POSITION)
+                        cardClickListener.onCardClick(alarms.get(position), days.get(position));
+                }
+            });
         }
 
     }
+
     //bruh
     private void getRepeatDays(DayOfTheWeekModel list) {
-        if(Boolean.TRUE.equals(list.getMonday()))
+        if (Boolean.TRUE.equals(list.getMonday()))
             data = data.concat("Mon");
-        if(Boolean.TRUE.equals(list.getTuesday())) {
+        if (Boolean.TRUE.equals(list.getTuesday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Tue");
         }
-        if(Boolean.TRUE.equals(list.getWednesday())) {
+        if (Boolean.TRUE.equals(list.getWednesday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Wed");
         }
-        if(Boolean.TRUE.equals(list.getThursday())) {
+        if (Boolean.TRUE.equals(list.getThursday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Thu");
         }
-        if(Boolean.TRUE.equals(list.getFriday())) {
+        if (Boolean.TRUE.equals(list.getFriday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Fri");
         }
-        if(Boolean.TRUE.equals(list.getSaturday())) {
+        if (Boolean.TRUE.equals(list.getSaturday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Sat");
         }
-        if(Boolean.TRUE.equals(list.getSunday())) {
+        if (Boolean.TRUE.equals(list.getSunday())) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Sun");
         }
+    }
+
+    public void setOnCardClickListener(OnCardClick cardClickListener) {
+        AlarmAdapter.cardClickListener = cardClickListener;
     }
 
 }
