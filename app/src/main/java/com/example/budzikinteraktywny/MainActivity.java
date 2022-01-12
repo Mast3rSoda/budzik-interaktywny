@@ -23,8 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int ADD_ALARM_RESULT = 1;
-    public static final int EDIT_ALARM_RESULT = 1;
     public static final int ALARM_DEFAULT_VALUE = 1;
     private AlarmViewModel alarmViewModel;
     public static final int RESULT_EDIT = 2;
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //                            alarmID -> ));
                     alarmViewModel.alarmModelInsert(new AlarmModel(1, 1, hour, minute, name, "e", true, true))
                             .observe(this, aLong -> {
-                                alarmViewModel.dayOfTheWeekInsert(new DayOfTheWeekModel(Math.toIntExact(aLong), values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
+                                alarmViewModel.dayOfTheWeekInsert(new DayOfTheWeekModel(aLong.intValue(), values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
                     });
                 } else if (result.getResultCode() == RESULT_EDIT) {
                     Toast.makeText(this, "Alarm edited!", Toast.LENGTH_SHORT).show();
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         alarmViewModel.updateIsOn(b, id);
     }
 
-    public boolean[] getOnButtons(DayOfTheWeekModel dayOfTheWeekModel) {
+    public boolean[] getOnButtons(@NonNull DayOfTheWeekModel dayOfTheWeekModel) {
         boolean[] values = new boolean[7];
         values[0] = dayOfTheWeekModel.getMonday();
         values[1] = dayOfTheWeekModel.getTuesday();
