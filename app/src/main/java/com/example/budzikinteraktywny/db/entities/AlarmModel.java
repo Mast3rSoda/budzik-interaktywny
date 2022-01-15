@@ -1,6 +1,8 @@
 package com.example.budzikinteraktywny.db.entities;
 
 
+import android.app.PendingIntent;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
