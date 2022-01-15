@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WAKE_LOCK,
             Manifest.permission.VIBRATE,
             Manifest.permission.DISABLE_KEYGUARD,
-            Manifest.permission.RECEIVE_BOOT_COMPLETED,
             Manifest.permission.FOREGROUND_SERVICE,
             Manifest.permission.SYSTEM_ALERT_WINDOW
     };
