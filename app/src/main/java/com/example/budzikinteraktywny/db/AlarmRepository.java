@@ -97,8 +97,11 @@ public class AlarmRepository {
         });
     }
 
-    //other functions
 
+    //other functions
+    public LiveData<DayOfTheWeekModel> getAlarmDays(int id) {
+        return dayOfTheWeekModelDao.getAlarmDays(id);
+    }
     public LiveData<List<AlarmModel>> getAllAlarms() {
         return allAlarms;
     }

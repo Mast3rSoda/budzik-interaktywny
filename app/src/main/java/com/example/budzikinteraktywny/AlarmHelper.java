@@ -6,14 +6,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import java.util.Calendar;
 
 public class AlarmHelper {
 
+    public static final String EXTRA_ID = "com.example.budzikinteraktywny.ah.id";
+
     void setAlarm(int id, Context context, Calendar calendar) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra(EXTRA_ID, id);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), pendingIntent);
 

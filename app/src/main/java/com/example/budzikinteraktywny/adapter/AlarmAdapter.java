@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budzikinteraktywny.AlarmHelper;
 import com.example.budzikinteraktywny.MainActivity;
 import com.example.budzikinteraktywny.callbacks.OnCardClick;
 import com.example.budzikinteraktywny.db.AlarmRepository;
@@ -22,6 +23,7 @@ import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
 import com.example.budzikinteraktywny.view_model.AlarmViewModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
@@ -51,6 +53,11 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         holder.onOffSwitch.setChecked(currentAlarm.isOn());
         holder.onOffSwitch.setOnClickListener(view -> {
             ((MainActivity) view.getContext()).setIsOn(!currentAlarm.isOn(), currentAlarm.getAlarmID());
+            Calendar calendar = ((MainActivity) view.getContext()).setCalendar(currentAlarm.getAlarmHour(), currentAlarm.getAlarmMinute());
+            if(currentAlarm.isOn())
+                ((MainActivity) view.getContext()).cancelAlarm(currentAlarm.getAlarmID(), calendar);
+            else
+                ((MainActivity) view.getContext()).setAlarm(currentAlarm.getAlarmID(), calendar);
         });
         data = "";
         getRepeatDays(currentDay);
@@ -99,34 +106,34 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
 
     //bruh
     private void getRepeatDays(DayOfTheWeekModel list) {
-        if (Boolean.TRUE.equals(list.getMonday()))
+        if (list.getMonday())
             data = data.concat("Mon");
-        if (Boolean.TRUE.equals(list.getTuesday())) {
+        if (list.getTuesday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Tue");
         }
-        if (Boolean.TRUE.equals(list.getWednesday())) {
+        if (list.getWednesday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Wed");
         }
-        if (Boolean.TRUE.equals(list.getThursday())) {
+        if (list.getThursday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Thu");
         }
-        if (Boolean.TRUE.equals(list.getFriday())) {
+        if (list.getFriday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Fri");
         }
-        if (Boolean.TRUE.equals(list.getSaturday())) {
+        if (list.getSaturday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Sat");
         }
-        if (Boolean.TRUE.equals(list.getSunday())) {
+        if (list.getSunday()) {
             if (!data.isEmpty())
                 data = data.concat(", ");
             data = data.concat("Sun");

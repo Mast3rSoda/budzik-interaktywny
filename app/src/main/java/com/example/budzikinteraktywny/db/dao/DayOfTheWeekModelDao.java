@@ -25,6 +25,9 @@ public interface DayOfTheWeekModelDao {
     @Update
     void update(DayOfTheWeekModel dayOfTheWeekModel);
 
-    @Query("SELECT * From DayOfTheWeekData ORDER BY alarmID DESC")
+    @Query("SELECT * FROM DayOfTheWeekData ORDER BY alarmID DESC")
     LiveData<List<DayOfTheWeekModel>> getAllDaysOrdered();
+
+    @Query("SELECT * FROM DayOfTheWeekData WHERE alarmID = :id")
+    LiveData<DayOfTheWeekModel> getAlarmDays(int id);
 }

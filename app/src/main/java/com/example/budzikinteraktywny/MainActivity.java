@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
+                Calendar calendar = Calendar.getInstance();
                 if (result.getResultCode() == RESULT_OK) {
                     Toast.makeText(this, "Alarm added!", Toast.LENGTH_SHORT).show();
                     Intent data = result.getData();
@@ -123,14 +124,14 @@ public class MainActivity extends AppCompatActivity {
                     int hour = data.getIntExtra(AddEditAlarmActivity.EXTRA_HOUR, ALARM_DEFAULT_VALUE);
                     int minute = data.getIntExtra(AddEditAlarmActivity.EXTRA_MINUTE, ALARM_DEFAULT_VALUE);
                     boolean[] values = data.getBooleanArrayExtra(AddEditAlarmActivity.EXTRA_VALUES);
-                    Calendar calendar = setCalendar(hour, minute);
-
+                    calendar = setCalendar(hour, minute);
+                    Calendar c = calendar;
 //                    alarmViewModel.alarmModelInsert(new AlarmModel(1, 1, hour, minute, name, "e", true, true),
 //                            alarmID -> ));
                     alarmViewModel.alarmModelInsert(new AlarmModel(1, 1, hour, minute, name, "e", true, true))
                             .observe(this, aLong -> {
                                 alarmViewModel.dayOfTheWeekInsert(new DayOfTheWeekModel(aLong.intValue(), values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
-                                setAlarm(aLong.intValue(), calendar);
+                                setAlarm(aLong.intValue(), c);
                             });
                 } else if (result.getResultCode() == RESULT_EDIT) {
                     Toast.makeText(this, "Alarm edited!", Toast.LENGTH_SHORT).show();
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     if (data == null) return;
                     int id = data.getIntExtra(AddEditAlarmActivity.EXTRA_ID, -1);
                     if (id == -1) return;
+                    cancelAlarm(id, calendar);
                     String name = data.getStringExtra(AddEditAlarmActivity.EXTRA_NAME);
                     int hour = data.getIntExtra(AddEditAlarmActivity.EXTRA_HOUR, ALARM_DEFAULT_VALUE);
                     int minute = data.getIntExtra(AddEditAlarmActivity.EXTRA_MINUTE, ALARM_DEFAULT_VALUE);
@@ -146,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
                     alarmModel.setAlarmID(id);
                     alarmViewModel.alarmModelUpdate(alarmModel);
                     alarmViewModel.dayOfTheWeekUpdate(new DayOfTheWeekModel(id, values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
+                    calendar = setCalendar(hour, minute);
+                    setAlarm(id, calendar);
                 }
 
             }
@@ -179,17 +183,28 @@ public class MainActivity extends AppCompatActivity {
         alarmViewModel.updateIsOn(b, id);
     }
 
+
+//    TODO Make repeating alarms start from the first day they are supposed to repeat on!
+//    Afaik the setNextAlarm function should be able to do that no problem
+//    Just gotta create the conditions in this func
     public Calendar setCalendar(int hour, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
+        if(calendar.before(Calendar.getInstance()) || calendar.equals(Calendar.getInstance()))
+            calendar.add(Calendar.DATE, 1);
         return calendar;
     }
 
     public void setAlarm(int id, Calendar calendar) {
         AlarmHelper alarmHelper = new AlarmHelper();
         alarmHelper.setAlarm(id, this, calendar);
+    }
+
+    public void cancelAlarm(int id, Calendar calendar) {
+        AlarmHelper alarmHelper = new AlarmHelper();
+        alarmHelper.cancelAlarm(id, this, calendar);
     }
 
     public boolean[] getOnButtonValues(@NonNull DayOfTheWeekModel dayOfTheWeekModel) {
