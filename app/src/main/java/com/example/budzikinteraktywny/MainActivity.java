@@ -23,6 +23,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -240,6 +242,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "testsettings", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.ciekawostka:
+                Uri uri = Uri.parse("https://youtube.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
                 Toast.makeText(this, "testciekawostka", Toast.LENGTH_SHORT).show();
                 return true;
             default:

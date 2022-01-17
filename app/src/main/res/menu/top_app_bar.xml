@@ -18,5 +18,5 @@
         android:id="@+id/ciekawostka"
         android:title="Ciekawostka astronomiczna"
         app:showAsAction="never"/>
-    
+
 </menu>
