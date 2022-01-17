@@ -94,7 +94,7 @@ public class AddEditAlarmActivity extends AppCompatActivity implements ButtonAda
         boolean[] values = viewModel.getButtonValues();
 
         if (title.trim().isEmpty()) {
-            title = "Alarm";
+            title = this.getResources().getString(R.string.defaultAlarmName);
         }
 
         Intent intent = new Intent();

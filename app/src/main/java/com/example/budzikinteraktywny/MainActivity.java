@@ -102,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int id = alarmAdapter.getAlarmAt(viewHolder.getAdapterPosition()).getAlarmID();
                 alarmViewModel.alarmModelDelete(alarmAdapter.getAlarmAt(viewHolder.getAdapterPosition()));
-                Snackbar.make(findViewById(R.id.relativeLayout), "Alarm Deleted!", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.relativeLayout), R.string.delete_alarm, Snackbar.LENGTH_SHORT).show();
+
             }
         }).attachToRecyclerView(alarmRecyclerView);
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             result -> {
                 Calendar calendar = Calendar.getInstance();
                 if (result.getResultCode() == RESULT_OK) {
-                    Toast.makeText(this, "Alarm added!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.add_alarm, Toast.LENGTH_SHORT).show();
                     Intent data = result.getData();
                     if (data == null) return;
                     String name = data.getStringExtra(AddEditAlarmActivity.EXTRA_NAME);
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                 setAlarm(aLong.intValue(), c);
                             });
                 } else if (result.getResultCode() == RESULT_EDIT) {
-                    Toast.makeText(this, "Alarm edited!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.edit_alarm, Toast.LENGTH_SHORT).show();
                     Intent data = result.getData();
                     if (data == null) return;
                     int id = data.getIntExtra(AddEditAlarmActivity.EXTRA_ID, -1);
@@ -238,18 +239,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.more:
-                Toast.makeText(this, "testsettings", Toast.LENGTH_SHORT).show();
+            case R.id.settings:
                 return true;
-            case R.id.ciekawostka:
+            case R.id.youtube:
                 Uri uri = Uri.parse("https://youtube.com");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 
-                Toast.makeText(this, "testciekawostka", Toast.LENGTH_SHORT).show();
                 return true;
             default:
-                Toast.makeText(this, "default", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "nothing done", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
         }
     }

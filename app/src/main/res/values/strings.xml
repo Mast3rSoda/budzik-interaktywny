@@ -1,6 +1,25 @@
 <resources>
-    <string name="app_name">Budzik Interaktywny</string>
+    <string name="app_name">Interactive Alarm Clock</string>
     <string name="addAlarmCD">Add Alarm</string>
     <string name="sidebarButtonCD">Open Sidebar</string>
     <string name="defaultAlarmName">Alarm</string>
+    <string name="translationtest">ENGLISH</string>
+    <string name="alarm_name">Alarm Name</string>
+    <string name="repeat">Repeat</string>
+    <string name="save">Save</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="days">Mon, Tue, Wed, Thu, Fri, Sat, Sun</string>
+    <string name="edit_alarm">Alarm edited!</string>
+    <string name="add_alarm">Alarm added!</string>
+    <string name="delete_alarm">Alarm deleted!</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="we">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+
 </resources>
