@@ -12,7 +12,11 @@
     <item
         android:id="@+id/more"
         android:title="Settings"
-        android:contentDescription="Settings"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/ciekawostka"
+        android:title="Ciekawostka astronomiczna"
+        app:showAsAction="never"/>
+    
 </menu>

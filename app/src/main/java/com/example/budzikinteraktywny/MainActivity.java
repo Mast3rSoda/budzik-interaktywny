@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +23,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
+
 
 import com.example.budzikinteraktywny.adapter.AlarmAdapter;
 import com.example.budzikinteraktywny.callbacks.OnCardClick;
@@ -57,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Toolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
         checkPermissions();
 
         RecyclerView alarmRecyclerView = findViewById(R.id.alarmRecyclerView);
@@ -220,5 +226,26 @@ public class MainActivity extends AppCompatActivity {
         return values;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_app_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.more:
+                Toast.makeText(this, "testsettings", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.ciekawostka:
+                Toast.makeText(this, "testciekawostka", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                Toast.makeText(this, "default", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
