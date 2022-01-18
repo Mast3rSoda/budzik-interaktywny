@@ -1,5 +1,6 @@
 package com.example.budzikinteraktywny.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +59,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             else
                 ((MainActivity) view.getContext()).setAlarm(currentAlarm.getAlarmID(), calendar);
         });
-        holder.daysOfWeekSelected.setText(getRepeatDays(currentDay));
+        holder.daysOfWeekSelected.setText(getRepeatDays(currentDay, holder.daysOfWeekSelected.getContext()));
     }
 
     @Override
@@ -103,22 +104,22 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
     //bruh
     //Jesus, why can't I really find a better way to do it?
     //Update... Found a better way to do it!
-    private String getRepeatDays(DayOfTheWeekModel dayOfTheWeekModel) {
+    private String getRepeatDays(DayOfTheWeekModel dayOfTheWeekModel, Context context) {
         List<String> values = new ArrayList<>();
         if (dayOfTheWeekModel.getMonday())
-            values.add("Mon");
+            values.add(context.getString(R.string.mon));
         if (dayOfTheWeekModel.getTuesday())
-            values.add("Tue");
+            values.add(context.getString(R.string.tue));
         if (dayOfTheWeekModel.getWednesday())
-            values.add("Wed");
+            values.add(context.getString(R.string.wed));
         if (dayOfTheWeekModel.getThursday())
-            values.add("Thu");
+            values.add(context.getString(R.string.thu));
         if (dayOfTheWeekModel.getFriday())
-            values.add("Fri");
+            values.add(context.getString(R.string.fri));
         if (dayOfTheWeekModel.getSaturday())
-            values.add("Sat");
+            values.add(context.getString(R.string.sat));
         if (dayOfTheWeekModel.getSunday())
-            values.add("Sun");
+            values.add(context.getString(R.string.sun));
         return String.valueOf(values).replaceAll("[\\[\\]]", "");
     }
 
