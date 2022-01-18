@@ -29,7 +29,6 @@ import java.util.List;
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
     private static List<AlarmModel> alarms = new ArrayList<>();
     private static List<DayOfTheWeekModel> days = new ArrayList<>();
-    private String data = "";
     private static OnCardClick cardClickListener;
 
     @NonNull
@@ -59,9 +58,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             else
                 ((MainActivity) view.getContext()).setAlarm(currentAlarm.getAlarmID(), calendar);
         });
-        data = "";
-        getRepeatDays(currentDay);
-        holder.daysOfWeekSelected.setText(data);
+        holder.daysOfWeekSelected.setText(getRepeatDays(currentDay));
     }
 
     @Override
@@ -103,41 +100,26 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         }
 
     }
-
     //bruh
-    private void getRepeatDays(DayOfTheWeekModel list) {
-        if (list.getMonday())
-            data = data.concat("Mon");
-        if (list.getTuesday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Tue");
-        }
-        if (list.getWednesday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Wed");
-        }
-        if (list.getThursday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Thu");
-        }
-        if (list.getFriday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Fri");
-        }
-        if (list.getSaturday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Sat");
-        }
-        if (list.getSunday()) {
-            if (!data.isEmpty())
-                data = data.concat(", ");
-            data = data.concat("Sun");
-        }
+    //Jesus, why can't I really find a better way to do it?
+    //Update... Found a better way to do it!
+    private String getRepeatDays(DayOfTheWeekModel dayOfTheWeekModel) {
+        List<String> values = new ArrayList<>();
+        if (dayOfTheWeekModel.getMonday())
+            values.add("Mon");
+        if (dayOfTheWeekModel.getTuesday())
+            values.add("Tue");
+        if (dayOfTheWeekModel.getWednesday())
+            values.add("Wed");
+        if (dayOfTheWeekModel.getThursday())
+            values.add("Thu");
+        if (dayOfTheWeekModel.getFriday())
+            values.add("Fri");
+        if (dayOfTheWeekModel.getSaturday())
+            values.add("Sat");
+        if (dayOfTheWeekModel.getSunday())
+            values.add("Sun");
+        return String.valueOf(values).replaceAll("[\\[\\]]", "");
     }
 
     public void setOnCardClickListener(OnCardClick cardClickListener) {
