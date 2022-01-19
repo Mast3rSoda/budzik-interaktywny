@@ -25,6 +25,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -124,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
-                Calendar calendar = Calendar.getInstance();
                 if (result.getResultCode() == RESULT_OK) {
                     Toast.makeText(this, R.string.add_alarm, Toast.LENGTH_SHORT).show();
                     Intent data = result.getData();
@@ -133,14 +133,13 @@ public class MainActivity extends AppCompatActivity {
                     int hour = data.getIntExtra(AddEditAlarmActivity.EXTRA_HOUR, ALARM_DEFAULT_VALUE);
                     int minute = data.getIntExtra(AddEditAlarmActivity.EXTRA_MINUTE, ALARM_DEFAULT_VALUE);
                     boolean[] values = data.getBooleanArrayExtra(AddEditAlarmActivity.EXTRA_VALUES);
-                    calendar = setCalendar(hour, minute);
-                    Calendar c = calendar;
+                    Calendar calendar = setCalendar(hour, minute, values);
 //                    alarmViewModel.alarmModelInsert(new AlarmModel(1, 1, hour, minute, name, "e", true, true),
 //                            alarmID -> ));
                     alarmViewModel.alarmModelInsert(new AlarmModel(1, 1, hour, minute, name, "e", true, true))
                             .observe(this, aLong -> {
                                 alarmViewModel.dayOfTheWeekInsert(new DayOfTheWeekModel(aLong.intValue(), values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
-                                setAlarm(aLong.intValue(), c);
+                                setAlarm(aLong.intValue(), calendar);
                             });
                 } else if (result.getResultCode() == RESULT_EDIT) {
                     Toast.makeText(this, R.string.edit_alarm, Toast.LENGTH_SHORT).show();
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     if (data == null) return;
                     int id = data.getIntExtra(AddEditAlarmActivity.EXTRA_ID, -1);
                     if (id == -1) return;
-                    cancelAlarm(id, calendar);
+                    cancelAlarm(id);
                     String name = data.getStringExtra(AddEditAlarmActivity.EXTRA_NAME);
                     int hour = data.getIntExtra(AddEditAlarmActivity.EXTRA_HOUR, ALARM_DEFAULT_VALUE);
                     int minute = data.getIntExtra(AddEditAlarmActivity.EXTRA_MINUTE, ALARM_DEFAULT_VALUE);
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     alarmModel.setAlarmID(id);
                     alarmViewModel.alarmModelUpdate(alarmModel);
                     alarmViewModel.dayOfTheWeekUpdate(new DayOfTheWeekModel(id, values[0], values[1], values[2], values[3], values[4], values[5], values[6]));
-                    calendar = setCalendar(hour, minute);
+                    Calendar calendar = setCalendar(hour, minute, values);
                     setAlarm(id, calendar);
                 }
 
@@ -167,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
 
     //No idea why this won't show the permissions box.
     //From logcat => "Can request only one set of permissions at a time"
+    //Checked the if values are being parsed correctly, they are.
+    //No idea why this isn't asking for permissions, app is working without them, so no worries
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<String>();
         for (final String permission : PERMISSIONS) {
@@ -193,15 +194,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    TODO Make repeating alarms start from the first day they are supposed to repeat on!
+    //    TODO Make repeating alarms start from the first day they are supposed to repeat on!
 //    Afaik the setNextAlarm function should be able to do that no problem
-//    Just gotta create the conditions in this func
-    public Calendar setCalendar(int hour, int minute) {
+//    Just gotta create the conditions in this func | In the end I've changed both
+//    As none of them was correct <_<
+//    But, alas.. It's finally working :D
+    public Calendar setCalendar(int hour, int minute, boolean[] values) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
-        if(calendar.before(Calendar.getInstance()) || calendar.equals(Calendar.getInstance()))
+        boolean[] temp = new boolean[7];
+        temp[0] = values[6];
+        System.arraycopy(values, 0, temp, 1, 6);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        if (temp[day - 1]) {
+            if (calendar.after(Calendar.getInstance()))
+                return calendar;
+        }
+        for (int i = day; i < 7; i++) {
+            if (temp[i]) {
+                if (i + 1 - day < 0)
+                    i += 7;
+                i = i + 1 - day;
+                calendar.add(Calendar.DATE, i);
+                return calendar;
+            }
+        }
+        for (int i = 0; i < day - 1; i++) {
+            if (temp[i]) {
+                if (i + 1 - day < 0)
+                    i += 7;
+                i = i + 1 - day;
+                calendar.add(Calendar.DATE, i);
+                return calendar;
+            }
+        }
+        if (temp[day - 1])
+            calendar.add(Calendar.DATE, 7);
+        if (calendar.before(Calendar.getInstance()) || calendar.equals(Calendar.getInstance()))
             calendar.add(Calendar.DATE, 1);
         return calendar;
     }
@@ -211,9 +242,9 @@ public class MainActivity extends AppCompatActivity {
         alarmHelper.setAlarm(id, this, calendar);
     }
 
-    public void cancelAlarm(int id, Calendar calendar) {
+    public void cancelAlarm(int id) {
         AlarmHelper alarmHelper = new AlarmHelper();
-        alarmHelper.cancelAlarm(id, this, calendar);
+        alarmHelper.cancelAlarm(id, this);
     }
 
     public boolean[] getOnButtonValues(@NonNull DayOfTheWeekModel dayOfTheWeekModel) {

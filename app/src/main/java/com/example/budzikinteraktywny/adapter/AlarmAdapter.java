@@ -53,11 +53,14 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         holder.onOffSwitch.setChecked(currentAlarm.isOn());
         holder.onOffSwitch.setOnClickListener(view -> {
             ((MainActivity) view.getContext()).setIsOn(!currentAlarm.isOn(), currentAlarm.getAlarmID());
-            Calendar calendar = ((MainActivity) view.getContext()).setCalendar(currentAlarm.getAlarmHour(), currentAlarm.getAlarmMinute());
             if(currentAlarm.isOn())
-                ((MainActivity) view.getContext()).cancelAlarm(currentAlarm.getAlarmID(), calendar);
-            else
+                ((MainActivity) view.getContext()).cancelAlarm(currentAlarm.getAlarmID());
+            else {
+                Calendar calendar = ((MainActivity) view.getContext()).setCalendar(currentAlarm.getAlarmHour(),
+                        currentAlarm.getAlarmMinute(),
+                        ((MainActivity) view.getContext()).getOnButtonValues(currentDay));
                 ((MainActivity) view.getContext()).setAlarm(currentAlarm.getAlarmID(), calendar);
+            }
         });
         holder.daysOfWeekSelected.setText(getRepeatDays(currentDay, holder.daysOfWeekSelected.getContext()));
     }

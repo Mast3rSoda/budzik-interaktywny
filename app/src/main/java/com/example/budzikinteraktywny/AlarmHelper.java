@@ -36,7 +36,7 @@ public class AlarmHelper {
 
     }
 
-    void cancelAlarm(int id, Context context, Calendar calendar) {
+    void cancelAlarm(int id, Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_IMMUTABLE);

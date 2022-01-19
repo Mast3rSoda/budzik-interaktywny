@@ -96,22 +96,33 @@ public class AlarmWakeActivity extends AppCompatActivity {
         return simpleDateFormat.format(calendar.getTime());
     }
 
+
+//    It's finally working :D
     public void setNextAlarm(int id) {
         AlarmRepository alarmRepository = new AlarmRepository(this.getApplication());
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND, 0);
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         alarmRepository.getAlarmDays(id).observe(this, days -> {
             boolean[] values = getDayValues(days);
-            for (int i = 0; i < 7; i++) {
-                if (day != i + 1) {
-                    if (values[i]) {
-                        if (i + 1 - day < 0)
-                            i += 7;
-                        i = i + 1 - day;
-                        calendar.add(Calendar.DATE, i);
-                        setAlarm(id, calendar);
-                        return;
-                    }
+            for (int i = day; i < 7; i++) {
+                if (values[i]) {
+                    if (i + 1 - day < 0)
+                        i += 7;
+                    i = i + 1 - day;
+                    calendar.add(Calendar.DATE, i);
+                    setAlarm(id, calendar);
+                    return;
+                }
+            }
+            for (int i = 0; i < day - 1; i++) {
+                if (values[i]) {
+                    if (i + 1 - day < 0)
+                        i += 7;
+                    i = i + 1 - day;
+                    calendar.add(Calendar.DATE, i);
+                    setAlarm(id, calendar);
+                    return;
                 }
             }
             if (values[day - 1]) {

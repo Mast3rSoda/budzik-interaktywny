@@ -68,4 +68,8 @@ public class AlarmViewModel extends AndroidViewModel {
     public LiveData<List<DayOfTheWeekModel>> getAllDays() {
         return allDays;
     }
+
+    public LiveData<DayOfTheWeekModel> getAlarmDays(int id) {
+        return repository.getAlarmDays(id);
+    }
 }
