@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int id = alarmAdapter.getAlarmAt(viewHolder.getAdapterPosition()).getAlarmID();
+//                WOOOOOOO!! No more softlocked alarms xddddd
+                cancelAlarm(id);
                 alarmViewModel.alarmModelDelete(alarmAdapter.getAlarmAt(viewHolder.getAdapterPosition()));
                 Snackbar.make(findViewById(R.id.relativeLayout), R.string.delete_alarm, Snackbar.LENGTH_SHORT).show();
 
