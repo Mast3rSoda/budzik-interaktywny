@@ -18,9 +18,7 @@ import java.util.Random;
 public class GameMathOperationFragment extends Fragment {
     private Random randomNumber = new Random();
     private String operationString;
-    private int num1;
-    private int num2;
-    private int num3;
+
     private int correctAnswer;
     TextView mathOperation;
     EditText mathAnswer;
@@ -79,41 +77,32 @@ public class GameMathOperationFragment extends Fragment {
     }
 
     public void createOperation() {
-//        for (int i = 0; i < numbers.length - 1; i += 2) {
-//            switch(randomNumber.nextInt(4)) {
-//                case 0:
-//                    correctAnswer += numbers[i] + numbers[i + 1];
-//                    break;
-//                case 1:
-//                    correctAnswer += numbers[i] - numbers[i + 1];
-//                    break;
-//                case 2:
-//                    correctAnswer += numbers[i] * numbers[i + 1];
-//                    break;
-//                case 3:
-//                    correctAnswer += numbers[i] / numbers[i + 1];
-//                    break;
-//            }
-//        }
-//
-//        if (randomNumber.nextInt(11) % 2 == 0) {
-//            correctAnswer = num1 + num2;
-//            operationString = num1 + " + " + num2;
-//        }
-//        else {
-//            correctAnswer = num1 - num2;
-//            operationString = num1 + " - " + num2;
-//        }
-//
-//        if (randomNumber.nextInt(11) % 2 == 0) {
-//            correctAnswer = correctAnswer + num3;
-//            operationString = operationString + " + " + num3;
-//        }
-//        else {
-//            correctAnswer = correctAnswer - num3;
-//            operationString = operationString + " - " + num3;
-//        }
-//
-//        operationString += " =";
+        int num1;
+        int num2;
+        int num3;
+
+        num1 = randomNumber.nextInt(150) + 1;
+        num2 = randomNumber.nextInt(150) + 1;
+        num3 = randomNumber.nextInt(150) + 1;
+
+        if (randomNumber.nextInt(11) % 2 == 0) {
+            correctAnswer = num1 + num2;
+            operationString = num1 + " + " + num2;
+        }
+        else {
+            correctAnswer = num1 - num2;
+            operationString = num1 + " - " + num2;
+        }
+
+        if (randomNumber.nextInt(11) % 2 == 0) {
+            correctAnswer = correctAnswer + num3;
+            operationString = operationString + " + " + num3;
+        }
+        else {
+            correctAnswer = correctAnswer - num3;
+            operationString = operationString + " - " + num3;
+        }
+
+        operationString += " =";
     }
 }

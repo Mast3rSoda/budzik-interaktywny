@@ -21,9 +21,3 @@ Kapp/src/main/java/com/example/budzikinteraktywny/adapter/ButtonAdapter.java,8\
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-r
-Bapp/src/main/java/com/example/budzikinteraktywny/MainActivity.java,1\7\17443726576e03d00f24d5574883afc4aebb6ea8
-w
-Gapp/src/main/java/com/example/budzikinteraktywny/AlarmWakeActivity.java,a\c\ac8bdf3b74cf2ec184e65eb1e6977e5807b4ca03
-
-Oapp/src/main/java/com/example/budzikinteraktywny/GameMathOperationFragment.java,8\9\8971e68842ee9d7bdbfc5175b8ec02eb7a02173e
