@@ -23,4 +23,11 @@
     <string name="sat">Sob</string>
     <string name="sun">Ndz</string>
 
+    <string name="fragmentStringTest">TEST PL</string>
+
+    <string name="submitButton">Zatwierdź</string>
+    <string name="gameMathDescription">Oblicz</string>
+    <string name="incorrectAnswer">Błędna odpowiedź</string>
+    <string name="correctAnswer">Poprawna odpowiedź</string>
+
 </resources>

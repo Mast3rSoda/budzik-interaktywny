@@ -12,10 +12,14 @@
         <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/item_list.xml" value="0.33" />
         <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/list_view_layout.xml" value="0.33" />
         <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/drawable/customborder.xml" value="0.290625" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/drawable/rounded_corners.xml" value="0.290625" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/alarm_wake.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/fragment_game.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

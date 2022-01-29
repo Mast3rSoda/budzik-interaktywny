@@ -1,0 +1,37 @@
+
+V
+java:S1874'";Remove this use of "FLAG_TURN_SCREEN_ON"; it is deprecated.(”§ˆßûÿÿÿÿ
+S
+java:S1874)"=Remove this use of "FLAG_SHOW_WHEN_LOCKED"; it is deprecated.(øõİ›
+S
+java:S1874*"=Remove this use of "FLAG_DISMISS_KEYGUARD"; it is deprecated.(…Šã
+V	java:S125."<This block of commented-out lines of code should be removed.(…úºáıÿÿÿÿ
+V	java:S125C"<This block of commented-out lines of code should be removed.(–Õƒşÿÿÿÿ
+R
+java:S1117L"<Rename "fragment" which hides the field declared at line 28.(ò„äË
+D
+java:S1125V"'Remove the unnecessary boolean literal.(ÿ™ûÕ8¡úîšê/
+H
+java:S1135`"2Complete the task associated to this TODO comment.(”ØÙ¬
+h
+java:S3776q"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ê‰ò¥
+r	java:S127{"XRefactor the code in order to not assign to this loop counter from within the loop body.(åÚ÷÷ùÿÿÿÿ
+m	java:S127|"XRefactor the code in order to not assign to this loop counter from within the loop body.(ƒ¾’ó
+s	java:S127…"XRefactor the code in order to not assign to this loop counter from within the loop body.(åÚ÷÷ùÿÿÿÿ
+n	java:S127†"XRefactor the code in order to not assign to this loop counter from within the loop body.(ƒ¾’ó
+C
+java:S1604R"(Make this anonymous inner class a lambda(Û‚ò—ùÿÿÿÿ
+A
+java:S5411™"*Use the primitive boolean expression here.(Ö„æÿ
+A
+java:S5411›"*Use the primitive boolean expression here.(ä÷ó
+F
+java:S5411"*Use the primitive boolean expression here.(Ş©™şøÿÿÿÿ
+F
+java:S5411Ÿ"*Use the primitive boolean expression here.(º¾ª×üÿÿÿÿ
+A
+java:S5411¡"*Use the primitive boolean expression here.(ª“
+A
+java:S5411£"*Use the primitive boolean expression here.(ÿˆ¥ï
+A
+java:S5411¥"*Use the primitive boolean expression here.(Ëşû²

@@ -1,42 +1,35 @@
 package com.example.budzikinteraktywny;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 
 import com.example.budzikinteraktywny.db.AlarmRepository;
 import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.temporal.WeekFields;
-import java.util.Arrays;
 import java.util.Calendar;
 
-public class AlarmWakeActivity extends AppCompatActivity {
-
+public class AlarmWakeActivity extends AppCompatActivity{
     MediaPlayer mediaPlayer = new MediaPlayer();
-
+    Fragment fragment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_wake);
-
 
         //Wooo! we got the alarm id.
         int id = getIntent().getIntExtra(AlarmReceiver.EXTRA_ID, -1);
@@ -50,7 +43,7 @@ public class AlarmWakeActivity extends AppCompatActivity {
 
         TextView alarmWakeTime = findViewById(R.id.alarmWakeTime);
         alarmWakeTime.setText(setAlarmTime());
-        Button alarmWakeButtonDismiss = findViewById(R.id.alarmWakeButtonDismiss);
+//        Button alarmWakeButtonDismiss = findViewById(R.id.alarmWakeButtonDismiss);
 
         setVolumeControlStream(AudioAttributes.USAGE_ALARM);
         mediaPlayer.setAudioAttributes(
@@ -71,13 +64,32 @@ public class AlarmWakeActivity extends AppCompatActivity {
 //        Turns out you shouldn't put the mediaPlayer.start() in a try/catch. Good to know.
         mediaPlayer.start();
 
-        alarmWakeButtonDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        alarmWakeButtonDismiss.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
         setNextAlarm(id);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.gameFragmentContainer);
+
+        if (fragment == null) {
+            fragment = new GameMathOperationFragment();
+            fragmentManager.beginTransaction().add(R.id.gameFragmentContainer, fragment).commit();
+
+            fragmentManager.setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+                @Override
+                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                    boolean result = bundle.getBoolean("isFinished");
+                    if (result == true)
+                        finish();
+                }
+            });
+        }
+
+
     }
 
     //On that note, onDestroy should last if we use fragments, right?
@@ -159,5 +171,4 @@ public class AlarmWakeActivity extends AppCompatActivity {
         AlarmHelper alarmHelper = new AlarmHelper();
         alarmHelper.setAlarm(id, this, calendar);
     }
-
 }

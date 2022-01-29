@@ -22,4 +22,10 @@
     <string name="sat">Sat</string>
     <string name="sun">Sun</string>
 
+    <string name="fragmentStringTest">TEST EN</string>
+
+    <string name="submitButton">Submit</string>
+    <string name="gameMathDescription">Calculate</string>
+    <string name="incorrectAnswer">Incorrect answer</string>
+    <string name="correctAnswer">Correct answer</string>
 </resources>
