@@ -15,16 +15,12 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class NumbersGameFragment extends Fragment {
-    private Random random = new Random();
+    private final Random random = new Random();
 
     TextView randomNumber;
 
     private int winIterator = 0;
     private int intRandomNumber;
-    private int randomNumberButtonIndex;
-    private int randomOtherNumber;
-
-    private int i = 0;
 
     Button button1;
     Button button2;
@@ -48,13 +44,8 @@ public class NumbersGameFragment extends Fragment {
             button9
     };
 
-    public NumbersGameFragment() {
-
-    }
-
-    public static NumbersGameFragment newInstance(String param1, String param2) {
-        NumbersGameFragment fragment = new NumbersGameFragment();
-        return fragment;
+    public static NumbersGameFragment newInstance() {
+        return new NumbersGameFragment();
     }
 
     @Override
@@ -79,7 +70,8 @@ public class NumbersGameFragment extends Fragment {
 
         displayNumbers();
 
-        for (i=0;i<9;i++){
+        int i = 0;
+        for (i =0; i <9; i++){
             final Button button = buttons[i];
             button.setOnClickListener(v -> {
                 if (Integer.parseInt(button.getText().toString()) == intRandomNumber) {
@@ -106,7 +98,7 @@ public class NumbersGameFragment extends Fragment {
     public void displayNumbers() {
 
         intRandomNumber = random.nextInt(100) + 1;
-        randomNumberButtonIndex = random.nextInt(9);
+        int randomNumberButtonIndex = random.nextInt(9);
 
         String stringRandomNumber = String.valueOf(intRandomNumber);
         randomNumber.setText(stringRandomNumber);
@@ -116,10 +108,11 @@ public class NumbersGameFragment extends Fragment {
             if (i == randomNumberButtonIndex) {
                 continue;
             }
+            int randomOtherNumber;
             do {
                 randomOtherNumber = random.nextInt(100) + 1;
             } while (randomOtherNumber == intRandomNumber);
-            buttons[i].setText(Integer.toString(randomOtherNumber));
+            buttons[i].setText(randomOtherNumber);
         }
 
     }

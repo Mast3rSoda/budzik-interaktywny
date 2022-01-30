@@ -30,8 +30,6 @@
     <string name="correctAnswer">Correct answer</string>
     <string name="gameMemoryDescription">Match all pairs</string>
     <string name="numbersGameDescription">Choose appropriate number 10 times</string>
-
-
     <string name="rewriteGameDescription">Rewrite 4 words</string>
     <string-array name="rewriteGameWords">
         <item>flight</item>

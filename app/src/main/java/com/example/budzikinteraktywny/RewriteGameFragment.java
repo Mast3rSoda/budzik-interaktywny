@@ -19,21 +19,14 @@ import java.util.Collections;
 import java.util.Random;
 
 public class RewriteGameFragment extends Fragment {
-    private Random random = new Random();
 
     private String correctAnswer;
     TextView wordsSentence;
     EditText wordsAnswer;
-    private String answer;
     Button submitButton;
 
-    public RewriteGameFragment() {
-
-    }
-
-    public static RewriteGameFragment newInstance(String param1, String param2) {
-        RewriteGameFragment fragment = new RewriteGameFragment();
-        return fragment;
+    public static RewriteGameFragment newInstance() {
+        return new RewriteGameFragment();
     }
 
     @Override

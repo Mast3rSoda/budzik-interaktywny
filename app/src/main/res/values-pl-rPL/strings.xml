@@ -30,7 +30,7 @@
     <string name="incorrectAnswer">Błędna odpowiedź</string>
     <string name="correctAnswer">Poprawna odpowiedź</string>
     <string name="gameMemoryDescription">Znajdź wszystkie pary</string>
-
+    <string name="numbersGameDescription">Wybierz odpowiednią liczbę 10 razy</string>
     <string name="rewriteGameDescription">Przepisz 4 słowa</string>
     <string-array name="rewriteGameWords">
         <item>potrzeba</item>
@@ -135,5 +135,4 @@
         <item>najbardziej</item>
     </string-array>
 
-    <string name="numbersGameDescription">Wybierz odpowiednią liczbę 10 razy</string>
 </resources>
