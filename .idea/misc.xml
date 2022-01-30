@@ -13,9 +13,12 @@
         <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/layout/list_view_layout.xml" value="0.33" />
         <entry key="..\:/Users/mast3/AndroidStudioProjects/BudzikInteraktywny/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/drawable/customborder.xml" value="0.290625" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/drawable/ic_baseline_add_20.xml" value="0.3828125" />
         <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/drawable/rounded_corners.xml" value="0.290625" />
         <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/alarm_wake.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/fragment_game.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/fragment_game_math_operation.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/zacxa/Desktop/repos/pz/budzik/app/src/main/res/layout/fragment_game_memory.xml" value="0.33" />
       </map>
     </option>
   </component>

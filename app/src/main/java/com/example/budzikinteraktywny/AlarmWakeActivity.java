@@ -76,7 +76,7 @@ public class AlarmWakeActivity extends AppCompatActivity{
         Fragment fragment = fragmentManager.findFragmentById(R.id.gameFragmentContainer);
 
         if (fragment == null) {
-            fragment = new GameMathOperationFragment();
+            fragment = new GameMemoryFragment();
             fragmentManager.beginTransaction().add(R.id.gameFragmentContainer, fragment).commit();
 
             fragmentManager.setFragmentResultListener("requestKey", this, new FragmentResultListener() {

@@ -28,4 +28,6 @@
     <string name="gameMathDescription">Calculate</string>
     <string name="incorrectAnswer">Incorrect answer</string>
     <string name="correctAnswer">Correct answer</string>
+    <string name="gameMemoryDescription">Match all pairs</string>
+
 </resources>

@@ -61,14 +61,12 @@ public class GameMathOperationFragment extends Fragment {
             }
 
             if (intMathAnswer == correctAnswer) {
-                Log.d("gameMath", "correct " + answerString + " " + correctAnswer);
                 Toast.makeText(getActivity(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
                 Bundle result = new Bundle();
                 result.putBoolean("isFinished", true);
                 getParentFragmentManager().setFragmentResult("requestKey", result);
             }
             else {
-                Log.d("gameMath", "incorrect " + answerString + " " + correctAnswer);
                 Toast.makeText(getActivity(), R.string.incorrectAnswer, Toast.LENGTH_SHORT).show();
             }
         });

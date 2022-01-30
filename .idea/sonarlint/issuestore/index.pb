@@ -17,7 +17,3 @@ z
 Japp/src/main/java/com/example/budzikinteraktywny/AddEditAlarmActivity.java,6\8\683b189f597f8b32d4092537bda793fd62cc414b
 {
 Kapp/src/main/java/com/example/budzikinteraktywny/adapter/ButtonAdapter.java,8\4\84065a1e6ab561755c59d517aa7b0471b9a48dac
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

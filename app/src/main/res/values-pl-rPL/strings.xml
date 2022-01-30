@@ -29,5 +29,6 @@
     <string name="gameMathDescription">Oblicz</string>
     <string name="incorrectAnswer">Błędna odpowiedź</string>
     <string name="correctAnswer">Poprawna odpowiedź</string>
+    <string name="gameMemoryDescription">Znajdź wszystkie pary</string>
 
 </resources>
