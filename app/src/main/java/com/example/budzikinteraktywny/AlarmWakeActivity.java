@@ -23,9 +23,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class AlarmWakeActivity extends AppCompatActivity{
+public class AlarmWakeActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer = new MediaPlayer();
-    Fragment fragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,6 @@ public class AlarmWakeActivity extends AppCompatActivity{
 
         //Wooo! we got the alarm id.
         int id = getIntent().getIntExtra(AlarmReceiver.EXTRA_ID, -1);
-
 
         final Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
@@ -47,13 +46,13 @@ public class AlarmWakeActivity extends AppCompatActivity{
 
         setVolumeControlStream(AudioAttributes.USAGE_ALARM);
         mediaPlayer.setAudioAttributes(
-                        new AudioAttributes.Builder()
+                new AudioAttributes.Builder()
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .setUsage(AudioAttributes.USAGE_ALARM)
                         .build()
         );
         try {
-            mediaPlayer.setDataSource(this, Uri.parse("android.resource://"+ getPackageName()+"/"+R.raw.get_up_ringtone));
+            mediaPlayer.setDataSource(this, Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.get_up_ringtone));
             mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,21 +78,12 @@ public class AlarmWakeActivity extends AppCompatActivity{
             fragment = new GameMemoryFragment();
             fragmentManager.beginTransaction().add(R.id.gameFragmentContainer, fragment).commit();
 
-            fragmentManager.setFragmentResultListener("requestKey", this, new FragmentResultListener() {
-                @Override
-                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                    boolean result = bundle.getBoolean("isFinished");
-                    if (result == true)
-                        finish();
-                }
+            fragmentManager.setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {
+                if (bundle.getBoolean("isFinished")) finish();
             });
         }
-
-
     }
 
-    //On that note, onDestroy should last if we use fragments, right?
-    //TODO Make the alarm last throughout the mini-game, not pause on button press
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -109,7 +99,7 @@ public class AlarmWakeActivity extends AppCompatActivity{
     }
 
 
-//    It's finally working :D
+    //    It's finally working :D
     public void setNextAlarm(int id) {
         AlarmRepository alarmRepository = new AlarmRepository(this.getApplication());
         Calendar calendar = Calendar.getInstance();
@@ -140,8 +130,7 @@ public class AlarmWakeActivity extends AppCompatActivity{
             if (values[day - 1]) {
                 calendar.add(Calendar.DATE, 7);
                 setAlarm(id, calendar);
-            }
-            else {
+            } else {
                 alarmRepository.updateIsOn(false, id);
             }
         });

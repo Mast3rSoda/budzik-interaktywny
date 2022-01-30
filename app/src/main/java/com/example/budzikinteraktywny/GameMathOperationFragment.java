@@ -13,52 +13,38 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class GameMathOperationFragment extends Fragment {
-    private Random randomNumber = new Random();
-    private String operationString;
 
     private int correctAnswer;
-    TextView mathOperation;
-    EditText mathAnswer;
-    int intMathAnswer;
-    Button submitButton;
 
-    public GameMathOperationFragment() {
-    }
 
-    public static GameMathOperationFragment newInstance(String param1, String param2) {
-        GameMathOperationFragment fragment = new GameMathOperationFragment();
-        return fragment;
+    public static GameMathOperationFragment newInstance() {
+        return new GameMathOperationFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createOperation();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_game_math_operation, container, false);
 
-        mathOperation = view.findViewById(R.id.mathGameOperation);
-        mathAnswer = view.findViewById(R.id.mathGameAnswer);
-        submitButton = view.findViewById(R.id.submitButton);
-        mathOperation.setText(operationString);
+        TextView mathOperation = view.findViewById(R.id.mathGameOperation);
+        EditText mathAnswer = view.findViewById(R.id.mathGameAnswer);
+        Button submitButton = view.findViewById(R.id.submitButton);
+        mathOperation.setText(createOperation());
 
         submitButton.setOnClickListener(v -> {
-            String answerString = mathAnswer.getText().toString();
 
-            try {
-                intMathAnswer = Integer.parseInt(answerString);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                int intMathAnswer = Integer.parseInt(mathAnswer.getText().toString());
                 Toast.makeText(getActivity(), R.string.incorrectAnswer, Toast.LENGTH_SHORT).show();
-                return;
-            }
 
             if (intMathAnswer == correctAnswer) {
                 Toast.makeText(getActivity(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();
@@ -74,15 +60,14 @@ public class GameMathOperationFragment extends Fragment {
         return view;
     }
 
-    public void createOperation() {
-        int num1;
-        int num2;
-        int num3;
+    public String createOperation() {
 
-        num1 = randomNumber.nextInt(150) + 1;
-        num2 = randomNumber.nextInt(150) + 1;
-        num3 = randomNumber.nextInt(150) + 1;
+        Random randomNumber = new Random();
+        int num1 = randomNumber.nextInt(150) + 1;
+        int num2 = randomNumber.nextInt(150) + 1;
+        int num3 = randomNumber.nextInt(150) + 1;
 
+        String operationString;
         if (randomNumber.nextInt(11) % 2 == 0) {
             correctAnswer = num1 + num2;
             operationString = num1 + " + " + num2;
@@ -101,6 +86,6 @@ public class GameMathOperationFragment extends Fragment {
             operationString = operationString + " - " + num3;
         }
 
-        operationString += " =";
+        return operationString + " =";
     }
 }

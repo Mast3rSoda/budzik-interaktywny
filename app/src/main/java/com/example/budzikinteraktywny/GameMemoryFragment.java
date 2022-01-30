@@ -13,7 +13,7 @@ import java.util.Collections;
 import android.widget.ImageButton;
 
 public class GameMemoryFragment extends Fragment {
-    ImageButton buttons[];
+    ImageButton[] buttons;
     ArrayList<Integer> images;
     int cardBlank;
     int visibleCards;
@@ -21,12 +21,8 @@ public class GameMemoryFragment extends Fragment {
     int lastCardId;
     int foundPairs;
 
-    public GameMemoryFragment() {
-    }
-
     public static GameMemoryFragment newInstance() {
-        GameMemoryFragment fragment = new GameMemoryFragment();
-        return fragment;
+        return new GameMemoryFragment();
     }
 
     @Override

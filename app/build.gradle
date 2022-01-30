@@ -2,12 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-allprojects {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:deprecation"
-    }
-}
-
 android {
     compileSdk 31
 
