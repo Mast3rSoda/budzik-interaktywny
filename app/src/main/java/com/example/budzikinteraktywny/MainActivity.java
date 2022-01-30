@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //                WOOOOOOO!! No more softlocked alarms xddddd
                 cancelAlarm(id);
                 alarmViewModel.alarmModelDelete(alarmAdapter.getAlarmAt(viewHolder.getAdapterPosition()));
-                Snackbar.make(findViewById(R.id.relativeLayout), R.string.delete_alarm, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.relativeLayout), R.string.delete_alarm, Snackbar.LENGTH_SHORT).setAnchorView(fab).show();
 
             }
         }).attachToRecyclerView(alarmRecyclerView);
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
     //No idea why this won't show the permissions box.
     //From logcat => "Can request only one set of permissions at a time"
-    //Checked the if values are being parsed correctly, they are.
+    //Checked if values are being parsed correctly, they are.
     //No idea why this isn't asking for permissions, app is working without them, so no worries
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<String>();
@@ -196,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //    TODO Make repeating alarms start from the first day they are supposed to repeat on!
 //    Afaik the setNextAlarm function should be able to do that no problem
 //    Just gotta create the conditions in this func | In the end I've changed both
 //    As none of them was correct <_<
