@@ -1,6 +1,8 @@
 package com.example.budzikinteraktywny.adapter;
 
 
+import android.content.res.Configuration;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budzikinteraktywny.R;
 import com.example.budzikinteraktywny.model.ButtonItem;
+import com.google.android.material.color.MaterialColors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +41,28 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     public void onBindViewHolder(@NonNull ButtonViewHolder holder, int position) {
         ButtonItem item = items.get(position);
         holder.button.setOnClickListener(view -> {
-          interactions.onButtonClick(position);
+            interactions.onButtonClick(position);
         });
         holder.button.setText(item.getText());
-        if(item.isEnabled()) {
-            int color = ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_200);
-            holder.button.setBackgroundColor(color);
+        int currentNightMode = holder.button.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int color = 0;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Night mode is not active on device
+                if (item.isEnabled())
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.golden_tainoi);
+                else
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.white);
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Night mode is active on device
+                if (item.isEnabled())
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.gray);
+                else
+                    color = ContextCompat.getColor(holder.itemView.getContext(), R.color.charcoal);
+                break;
         }
-        else {
-            int color = ContextCompat.getColor(holder.itemView.getContext(), R.color.salmon);
-            holder.button.setBackgroundColor(color);
-        }
+        holder.button.setBackgroundColor(color);
     }
 
     @Override
