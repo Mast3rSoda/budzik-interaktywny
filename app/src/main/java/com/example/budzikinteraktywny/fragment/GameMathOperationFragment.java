@@ -1,10 +1,9 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.fragment;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.budzikinteraktywny.R;
 
 import java.util.Random;
 
@@ -44,7 +43,6 @@ public class GameMathOperationFragment extends Fragment {
         submitButton.setOnClickListener(v -> {
 
                 int intMathAnswer = Integer.parseInt(mathAnswer.getText().toString());
-                Toast.makeText(getActivity(), R.string.incorrectAnswer, Toast.LENGTH_SHORT).show();
 
             if (intMathAnswer == correctAnswer) {
                 Toast.makeText(getActivity(), R.string.correctAnswer, Toast.LENGTH_SHORT).show();

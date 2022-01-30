@@ -1,10 +1,10 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.alarm_manager;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.WindowManager;
+
+import com.example.budzikinteraktywny.activity.AlarmWakeActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
 

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_margin="20dp"
-    tools:context=".RewriteGameFragment">
+    tools:context=".fragment.RewriteGameFragment">
 
     <LinearLayout
         android:layout_gravity="center"

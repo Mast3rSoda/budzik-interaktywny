@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,9 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.budzikinteraktywny.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class RewriteGameFragment extends Fragment {
 

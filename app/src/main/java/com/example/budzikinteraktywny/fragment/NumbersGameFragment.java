@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.budzikinteraktywny.R;
 
 import java.util.Random;
 
@@ -112,7 +114,7 @@ public class NumbersGameFragment extends Fragment {
             do {
                 randomOtherNumber = random.nextInt(100) + 1;
             } while (randomOtherNumber == intRandomNumber);
-            buttons[i].setText(randomOtherNumber);
+            buttons[i].setText(Integer.toString(randomOtherNumber));
         }
 
     }

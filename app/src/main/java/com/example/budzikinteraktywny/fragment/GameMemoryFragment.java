@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.widget.ImageButton;
+
+import com.example.budzikinteraktywny.R;
 
 public class GameMemoryFragment extends Fragment {
     ImageButton[] buttons;

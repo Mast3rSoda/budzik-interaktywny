@@ -1,4 +1,4 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.activity;
 
 import android.annotation.SuppressLint;
 import android.media.AudioAttributes;
@@ -9,19 +9,25 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 
+import com.example.budzikinteraktywny.alarm_manager.AlarmHelper;
+import com.example.budzikinteraktywny.alarm_manager.AlarmReceiver;
+import com.example.budzikinteraktywny.fragment.GameMathOperationFragment;
+import com.example.budzikinteraktywny.fragment.GameMemoryFragment;
+import com.example.budzikinteraktywny.fragment.NumbersGameFragment;
+import com.example.budzikinteraktywny.R;
+import com.example.budzikinteraktywny.fragment.RewriteGameFragment;
 import com.example.budzikinteraktywny.db.AlarmRepository;
 import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 public class AlarmWakeActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer = new MediaPlayer();
@@ -75,7 +81,21 @@ public class AlarmWakeActivity extends AppCompatActivity {
         Fragment fragment = fragmentManager.findFragmentById(R.id.gameFragmentContainer);
 
         if (fragment == null) {
-            fragment = new GameMemoryFragment();
+            Random random = new Random();
+            switch (random.nextInt(4)) {
+                case 0:
+                    fragment = new GameMemoryFragment();
+                    break;
+                case 1:
+                    fragment = new RewriteGameFragment();
+                    break;
+                case 2:
+                    fragment = new NumbersGameFragment();
+                    break;
+                case 3:
+                    fragment = new GameMathOperationFragment();
+                    break;
+            }
             fragmentManager.beginTransaction().add(R.id.gameFragmentContainer, fragment).commit();
 
             fragmentManager.setFragmentResultListener("requestKey", this, (requestKey, bundle) -> {

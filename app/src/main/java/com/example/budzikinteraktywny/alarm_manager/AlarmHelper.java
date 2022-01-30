@@ -1,12 +1,9 @@
-package com.example.budzikinteraktywny;
+package com.example.budzikinteraktywny.alarm_manager;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -14,7 +11,7 @@ public class AlarmHelper {
 
     public static final String EXTRA_ID = "com.example.budzikinteraktywny.ah.id";
 
-    void setAlarm(int id, Context context, Calendar calendar) {
+    public void setAlarm(int id, Context context, Calendar calendar) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra(EXTRA_ID, id);
@@ -32,11 +29,7 @@ public class AlarmHelper {
 
     }
 
-    void updateAlarm() {
-
-    }
-
-    void cancelAlarm(int id, Context context) {
+    public void cancelAlarm(int id, Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_IMMUTABLE);

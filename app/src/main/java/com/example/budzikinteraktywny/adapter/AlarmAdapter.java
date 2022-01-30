@@ -1,27 +1,20 @@
 package com.example.budzikinteraktywny.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.budzikinteraktywny.AlarmHelper;
-import com.example.budzikinteraktywny.MainActivity;
+import com.example.budzikinteraktywny.activity.MainActivity;
 import com.example.budzikinteraktywny.callbacks.OnCardClick;
-import com.example.budzikinteraktywny.db.AlarmRepository;
-import com.example.budzikinteraktywny.db.dao.AlarmGamesDao;
-import com.example.budzikinteraktywny.db.dao.AlarmModelDao;
 import com.example.budzikinteraktywny.db.entities.AlarmModel;
 import com.example.budzikinteraktywny.R;
 import com.example.budzikinteraktywny.db.entities.DayOfTheWeekModel;
-import com.example.budzikinteraktywny.view_model.AlarmViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
